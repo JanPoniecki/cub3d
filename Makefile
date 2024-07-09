@@ -3,7 +3,7 @@ NAME = cub3d
 LIB = ./mylibft/mylibft.a
 OBJDIR = Obj/
 MLX = mlxlibX/libmlx_Linux.a
-SRC = main.c
+SRC = main.c myjob.c
 
 OBJ := $(SRC:%.c=$(OBJDIR)%.o)
 

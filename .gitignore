@@ -1,0 +1,15 @@
+Obj
+cub3d
+.vscode
+readline
+pipex/libft/*.o
+pipex/libft/*.a
+main.o
+mylibft/ft_printf/*.o
+mylibft/libft/*.o
+mylibft/mylibft.a
+mylibft/ft_printf/libftprintf.a
+mylibft/get_next_line/*.o
+mylibft/get_next_line/*.a
+mylibft/libft/libft.a
+a.out

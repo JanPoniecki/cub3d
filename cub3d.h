@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/09 12:43:32 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:46:46 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@
 
 # define HEIGHT 800
 # define WIDTH 1000
-
+# define FILWI 9
 typedef struct s_core
 {
 	void	*con;
 	void	*win;
 	void	*img;
+	char	*addr;
+	int		endian;
+	int		bits_per_pixel;
+	int		line_length;
+	int		wid;
 }			t_core;
 
 #endif
