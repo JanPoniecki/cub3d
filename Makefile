@@ -1,0 +1,37 @@
+FLAGS = -Wall -Wextra -Werror -g
+NAME = cub3d
+LIB = ./mylibft/mylibft.a
+OBJDIR = Obj/
+MLX = mlxlibX/libmlx_Linux.a
+SRC = main.c
+
+OBJ := $(SRC:%.c=$(OBJDIR)%.o)
+
+all: $(NAME)
+	@echo "Compilation completed."
+
+$(NAME): mylibft/mylibft.a $(OBJ)
+	@cc $(FLAGS) $^ -o $@ $(LIB) mlxlibX/libmlx_Linux.a -lXext -lX11 -lm
+
+%.o: %.c
+	@cc $(FLAGS) -Imlx_linux -O3 -c $< -o $@
+
+$(OBJDIR)%.o: %.c
+	@mkdir -p $(@D)
+	@cc $(FLAGS) -c $< -o $@
+
+mylibft/mylibft.a:
+	@make -s -C mylibft
+
+clean:
+	@rm -f $(OBJ)
+	@rm -rf $(OBJDIR)
+
+fclean: clean
+	@rm -f $(NAME)
+	@rm -rf $(OBJDIR)
+	@echo "Cleared."
+
+re: fclean all
+
+.PHONY: all, clean, fclean, re

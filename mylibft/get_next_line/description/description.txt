@@ -1,0 +1,48 @@
+find_last_node(t_list *list): This function traverses the linked list 
+until it finds the last node (the node where the next pointer is NULL). 
+It returns this last node. If the input list is NULL, it also returns NULL.
+
+dealloc(t_list **list, t_list *clean_node, char *buffer): 
+This function deallocates the memory used by the linked list. 
+It frees the string buffer and the node itself for each node in the list. 
+After freeing all nodes, it sets the list pointer to NULL. 
+If the string buffer of the clean_node is not empty, it sets the list pointer to clean_node.
+Otherwise, it also frees buffer and clean_node.
+
+polish_list(t_list **list): This function cleans up the list after a line has been read. 
+It finds the last node in the list and copies the characters after the newline character 
+in the last node's string buffer to a new buffer. It then creates a new node with this 
+buffer and deallocates the old list. If memory allocation for the new buffer or node fails,
+it returns without doing anything.
+
+copy_str(t_list *list, char *str): This function copies characters from the list's string 
+buffers to the input string until it encounters a newline character or reaches the end of the list.
+It stops copying when it encounters a newline character and appends a null character to the end of the string.
+
+len_to_newline(t_list *list): This function calculates the length to the next newline character in 
+the list's string buffers. It traverses the list and counts the characters until it encounters 
+a newline character or reaches the end of the list. It returns the count. If the list is NULL, it returns 0.
+
+get_line(t_list *list): This function takes a linked list as input. 
+It calculates the length to the next newline character in the list's string buffer, 
+allocates memory for a new string of that length, copies the characters from the list's 
+string buffer to the new string, and returns the new string. 
+If the list is NULL or memory allocation fails, it returns NULL.
+
+is_newline(t_list *list): This function checks if there's a newline character in the string 
+buffer of any node in the linked list. It returns 1 if a newline is found, and 0 otherwise.
+
+append(t_list **list, char *buffer): This function appends a new node to the end of the linked list.
+The new node's string buffer is set to the input buffer, and its next pointer is set to NULL. 
+If memory allocation for the new node fails, the function returns without doing anything.
+
+create_list(t_list **list, int fd): This function reads from a file descriptor into a buffer 
+until it encounters a newline character or reaches the end of the file. It appends each buffer 
+to the linked list. If memory allocation for a buffer fails, or if the end of the file is reached, the function returns.
+
+get_next_line(int fd): This function is the main function. It checks if 
+the file descriptor is valid and if the buffer size is greater than 0. If not, it returns NULL. 
+It then creates a linked list from the file's contents. If the list is NULL after this,
+it returns NULL. It then gets the next line from the list,
+polishes the list (removes the line that was just read), and returns the line. 
+If the read function fails, it also returns NULL.

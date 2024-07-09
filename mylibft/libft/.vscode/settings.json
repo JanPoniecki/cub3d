@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"libft.h": "c",
+		"random": "c"
+	},
+	"C_Cpp.errorSquiggles": "disabled",
+	"editor.defaultFormatter": "keyhr.42-c-format"
+}
