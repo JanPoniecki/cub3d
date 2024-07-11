@@ -19,9 +19,14 @@ int	main(void)
 
 	int fd = open("map_test", O_RDONLY);
 	read(fd, map_string, 10000);
-	ft_printf("%s\n", map_string);
+	// printf("%s\n", map_string);
 	hero.map = ft_split(map_string, '\n');
 	find_start(&hero);
-	ft_printf("%d, %d, \n", hero.pos[0], hero.pos[1]);
-	ft_printf("%c \n", hero.map[hero.pos[0]][hero.pos[1]]);
+	// printf("%d, %d, \n", hero.pos[0], hero.pos[1]);
+	// printf("%c \n", hero.map[hero.pos[0]][hero.pos[1]]);
+	calc_axis(&hero, 'y');
+	calc_axis(&hero, 'x');
+	calc_viev(&hero);
+	print_map(&hero);
+	free(map_string);
 }

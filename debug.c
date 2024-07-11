@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_utils.c                                      :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 12:42:47 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/11 20:49:16 by jponieck         ###   ########.fr       */
+/*   Created: 2024/07/10 21:17:54 by jponieck          #+#    #+#             */
+/*   Updated: 2024/07/10 21:26:08 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	find_start(t_hero *hero)
+void	print_map(t_hero *hero)
 {
-	int	crd[2];
+	int	i;
 
-	crd[0] = 0;
-	crd[1] = 0;
-	while (hero->map[crd[0]])
+	i = 0;
+	while(hero->map[i])
 	{
-		while (hero->map[crd[0]][crd[1]])
-		{
-			if (ft_strchr("NSEW", hero->map[crd[0]][crd[1]]))
-			{
-				hero->pos[0] = crd[0];
-				hero->pos[1] = crd[1];
-				hero->angle = 45;
-				hero->map[crd[0]][crd[1]] = '0';
-				return ;
-			}
-			crd[1] ++;
-		}
-		crd[1] = 0;
-		crd[0] ++;
+		printf("%s\n", hero->map[i]);
+		i ++;
 	}
 }
