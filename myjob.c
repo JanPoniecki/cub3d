@@ -60,21 +60,21 @@ void	put_filars(t_core *main_struct)
 		put_one_filar(main_struct, main_struct->wid, lista[i]);
 }
 
-int	main(void)
-{
-	t_core	main_struct;
+// int	main(void)
+// {
+// 	t_core	main_struct;
 
-	main_struct.wid = 0;
-	main_struct.con = mlx_init();
-	main_struct.win = mlx_new_window(main_struct.con, WIDTH, HEIGHT, "cub3d");
-	main_struct.img = mlx_new_image(main_struct.con, WIDTH, HEIGHT);
-	main_struct.addr = mlx_get_data_addr(main_struct.img, &main_struct.bits_per_pixel,
-			&main_struct.line_length, &main_struct.endian);
-	put_filars(&main_struct);
-	mlx_put_image_to_window(main_struct.con, main_struct.win,
-		main_struct.img, 0, 0);
-	mlx_hook(main_struct.win, 17, 0L, mlx_loop_end, main_struct.con);
-	mlx_key_hook(main_struct.win, my_key_hook, &main_struct);
-	mlx_loop(main_struct.con);
-	close_window(&main_struct);
-}
+// 	main_struct.wid = 0;
+// 	main_struct.con = mlx_init();
+// 	main_struct.win = mlx_new_window(main_struct.con, WIDTH, HEIGHT, "cub3d");
+// 	main_struct.img = mlx_new_image(main_struct.con, WIDTH, HEIGHT);
+// 	main_struct.addr = mlx_get_data_addr(main_struct.img, &main_struct.bits_per_pixel,
+// 			&main_struct.line_length, &main_struct.endian);
+// 	put_filars(&main_struct);
+// 	mlx_put_image_to_window(main_struct.con, main_struct.win,
+// 		main_struct.img, 0, 0);
+// 	mlx_hook(main_struct.win, 17, 0L, mlx_loop_end, main_struct.con);
+// 	mlx_key_hook(main_struct.win, my_key_hook, &main_struct);
+// 	mlx_loop(main_struct.con);
+// 	close_window(&main_struct);
+// }
