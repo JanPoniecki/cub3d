@@ -27,6 +27,6 @@ int	main(void)
 	calc_axis(&hero, 'y');
 	calc_axis(&hero, 'x');
 	calc_viev(&hero);
-	print_map(&hero);
+	// print_map(&hero);
 	free(map_string);
 }

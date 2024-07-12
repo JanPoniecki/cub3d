@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/11 21:18:01 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/11 23:39:33 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define HEIGHT 800
 # define WIDTH 1000
 # define V_RANGE 45
+# define FILAR_SIZE 15
 
 typedef struct s_axis
 {
@@ -41,7 +42,7 @@ typedef struct s_axis
 	int		err;
 	int		e2;
 	double	degr;
-	int		colision[3];
+	int		colision[4];
 }	t_axis;
 
 typedef struct s_hero
@@ -53,6 +54,7 @@ typedef struct s_hero
 	int		x_index;
 	int		pos[2];
 	int		angle;
+	int		walls[V_RANGE * 2];
 	int		vision[V_RANGE * 2];
 }	t_hero;
 

@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:17:33 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/11 21:49:50 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/11 23:36:23 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_collision_vars(t_hero *hero, t_axis *axis, int angle)
 }
 
 
-void	find_collision(t_hero *hero, t_axis *axis, int angle)
+void	find_collision(t_hero *hero, t_axis *axis, int i)
 {
 	while (1)
 	{
@@ -80,7 +80,7 @@ void	find_collision(t_hero *hero, t_axis *axis, int angle)
 			axis->colision[0] = axis->x0;
 			axis->colision[1] = axis->y0;
 			axis->colision[2] = hero->map[axis->x0][axis->y0];
-			hero->map[axis->x0][axis->y0] = 'C';
+			hero->walls[V_RANGE * 2 - 1 - i] = ((axis->colision[2] - 48) * 10000 + axis->x0);
 			return ;
 		}
 		axis->e2 = 2 * axis->err;
@@ -231,11 +231,7 @@ int		calc_height(t_hero *hero, t_axis *axis, int i)
 	a = ft_abs(axis->x0 - hero->pos[0]);
 	b = ft_abs(axis->y0 - hero->pos[1]);
 	c = sqrt(a * a + b * b);
-	printf("c %f\n", c);
 	c = c * sine(90 - ang);
-	printf("angle %d\n", ang);
-	printf("c sin %f\n", c);
-	printf("-------\n");
 	a = (int)round(c);
 	return (5000 / (a * 0.7));
 }
@@ -245,8 +241,8 @@ void	get_collision(t_hero *hero, int angle, int i)
 	t_axis	axis;
 
 	init_collision_vars(hero, &axis, angle);
-	find_collision(hero, &axis, angle);
-	hero->vision[i] = calc_height(hero, &axis, i);
+	find_collision(hero, &axis, i);
+	hero->vision[V_RANGE * 2 - 1 - i] = calc_height(hero, &axis, i);
 }
 
 void	calc_viev(t_hero *hero)
@@ -267,7 +263,9 @@ void	calc_viev(t_hero *hero)
 	i = 0;
 	while (i != V_RANGE * 2)
 	{
-		printf("%d\n", hero->vision[i]);
+		printf("%d \n", hero->vision[i]);
+		printf("%d \n", hero->walls[i]);
+		printf("----------\n");
 		i++;
 	}
 }
