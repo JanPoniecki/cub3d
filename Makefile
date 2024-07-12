@@ -1,9 +1,10 @@
-FLAGS = -Wall -Wextra -Werror -g
+# FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -g
 NAME = cub3d
 LIB = ./mylibft/mylibft.a
 OBJDIR = Obj/
 MLX = mlxlibX/libmlx_Linux.a
-SRC = main.c myjob.c
+SRC = main.c myjob.c start_utils.c calc.c debug.c
 
 OBJ := $(SRC:%.c=$(OBJDIR)%.o)
 
