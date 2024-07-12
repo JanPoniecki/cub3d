@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/12 10:38:18 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:55:15 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ double	cosine(int angle);
 void	calc_axis(t_hero *hero, char type);
 void	print_map(t_hero *hero);
 void	calc_viev(t_hero *hero);
+void	ext_map(t_hero *hero);
 
 #endif
