@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:17:33 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/11 23:36:23 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/13 20:18:30 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ void	find_collision(t_hero *hero, t_axis *axis, int i)
 			axis->colision[0] = axis->x0;
 			axis->colision[1] = axis->y0;
 			axis->colision[2] = hero->map[axis->x0][axis->y0];
-			hero->walls[V_RANGE * 2 - 1 - i] = ((axis->colision[2] - 48) * 10000 + axis->x0);
+			if (hero->map[axis->x0][axis->y0] == '1' || hero->map[axis->x0][axis->y0] == '3')
+				hero->walls[V_RANGE * 2 - 1 - i] = ((axis->colision[2] - 48) * 10000 + axis->x0);
+			else
+				hero->walls[V_RANGE * 2 - 1 - i] = ((axis->colision[2] - 48) * 10000 + axis->y0);
 			return ;
 		}
 		axis->e2 = 2 * axis->err;
@@ -231,7 +234,8 @@ int		calc_height(t_hero *hero, t_axis *axis, int i)
 	a = ft_abs(axis->x0 - hero->pos[0]);
 	b = ft_abs(axis->y0 - hero->pos[1]);
 	c = sqrt(a * a + b * b);
-	c = c * sine(90 - ang);
+	// c = c * sine(90 - ang);
+	a = c;
 	a = (int)round(c);
 	return (5000 / (a * 0.7));
 }
@@ -239,10 +243,15 @@ int		calc_height(t_hero *hero, t_axis *axis, int i)
 void	get_collision(t_hero *hero, int angle, int i)
 {
 	t_axis	axis;
+	int		height;
 
 	init_collision_vars(hero, &axis, angle);
 	find_collision(hero, &axis, i);
-	hero->vision[V_RANGE * 2 - 1 - i] = calc_height(hero, &axis, i);
+	printf("colision: %d %d\n", axis.colision[0], axis.colision[1]);
+	height = calc_height(hero, &axis, i);
+	if (height > HEIGHT)
+		height = HEIGHT;
+	hero->vision[V_RANGE * 2 - 1 - i] = height;
 }
 
 void	calc_viev(t_hero *hero)
@@ -250,7 +259,7 @@ void	calc_viev(t_hero *hero)
 	int	angle;
 	int	i;
 
-	printf("%d %d\n", hero->pos[0], hero->pos[1]);
+	// printf("%d %d\n", hero->pos[0], hero->pos[1]);
 	ft_bzero(hero->vision, V_RANGE * 2);
 	angle = hero->angle - V_RANGE;
 	i = 0;
@@ -260,12 +269,13 @@ void	calc_viev(t_hero *hero)
 		i ++;
 		angle ++;
 	}
+	fine_tune_view(hero);
 	i = 0;
-	while (i != V_RANGE * 2)
-	{
-		printf("%d \n", hero->vision[i]);
-		printf("%d \n", hero->walls[i]);
-		printf("----------\n");
-		i++;
-	}
+	// while (i != V_RANGE * 2)
+	// {
+	// 	printf("%d \n", hero->vision[i]);
+	// 	printf("%d \n", hero->walls[i]);
+	// 	printf("----------\n");
+	// 	i++;
+	// }
 }
