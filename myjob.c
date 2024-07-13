@@ -22,27 +22,29 @@ void	my_mlx_pixel_put(t_core *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void for_arrows(int	keycode)
+void for_arrows(int	keycode, t_core *mlx)
 {
 	if (keycode == 65361)
 	{
-		printf("<- clicked\n");
-		// Janek's function
+		rotate(mlx, 5);
+		int len = sizeof(mlx->hero->vision) / 4;
+		put_filars(mlx, mlx->hero->vision, len);
 	}
 	else if (keycode == 65363)
 	{
-		printf("-> clicked\n");
-		// Janek's funciton
+		rotate(mlx, -5);
+		int len = sizeof(mlx->hero->vision) / 4;
+		put_filars(mlx, mlx->hero->vision, len);
 	}
 }
 
 int	my_key_hook(int keycode, t_core *mlx)
 {
 	// that is Janke's list to display the img
-	int lista[] = {90, 100, 100, 100, 10, 89, 88, 88, 87, 87, 86, 86, 85, 84, 84, 83, 82, 82, 81, 80, 79, 78, 77, 76, 74, 74,
-		72, 60, 61, 61, 61, 60, 58, 100, 50, 45, 41, 41, 41, 41, 41, 41, 41, 41, 41, 40, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41,
-		45, 49, 53, 57, 59, 32, 15, 17, 69, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 81, 82, 83, 84, 84, 85, 85, 86, 86, 87, 87, 88, 88, 89, 89};
-	int	len = sizeof(lista) / 4;
+	// int lista[] = {90, 100, 100, 100, 10, 89, 88, 88, 87, 87, 86, 86, 85, 84, 84, 83, 82, 82, 81, 80, 79, 78, 77, 76, 74, 74,
+	// 	72, 60, 61, 61, 61, 60, 58, 100, 50, 45, 41, 41, 41, 41, 41, 41, 41, 41, 41, 40, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41,
+	// 	45, 49, 53, 57, 59, 32, 15, 17, 69, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 81, 82, 83, 84, 84, 85, 85, 86, 86, 87, 87, 88, 88, 89, 89};
+	// int	len = sizeof(lista) / 4;
 	// function put_filars will do everything
 	// you have to just give the list of the height
 	// and it will display it
@@ -53,26 +55,29 @@ int	my_key_hook(int keycode, t_core *mlx)
 		close_window(mlx);
 	else if (keycode == 119)
 	{
-		printf("W clicked\n");
-		put_filars(mlx, lista, len);
-		// Janek's function
+		move_on_y(mlx, 1);
+		int len = sizeof(mlx->hero->vision) / 4;
+		put_filars(mlx, mlx->hero->vision, len);
 	}
 	else if (keycode == 115)
 	{
-		printf("S clicked\n");
-		// Janek's function
+		move_on_y(mlx, - 1);
+		int len = sizeof(mlx->hero->vision) / 4;
+		put_filars(mlx, mlx->hero->vision, len);
 	}
 	else if (keycode == 97)
 	{
-		printf("A clicked\n");
-		// Janek's function
+		move_on_x(mlx, - 1);
+		int len = sizeof(mlx->hero->vision) / 4;
+		put_filars(mlx, mlx->hero->vision, len);
 	}
 	else if (keycode == 100)
 	{
-		printf("D clicked\n");
-		// Janek's function
+		move_on_x(mlx, 1);
+		int len = sizeof(mlx->hero->vision) / 4;
+		put_filars(mlx, mlx->hero->vision, len);
 	}
-	for_arrows(keycode);
+	for_arrows(keycode, mlx);
 	return (0);
 }
 
@@ -80,7 +85,7 @@ void	put_one_filar(t_core *main_struct, int i, int hig)
 {
 	int	j = -1;
 	int	tmp = i;
-	int	tmph = (hig * HEIGHT) / 100;
+	int	tmph = hig;
 	int	tmpe = (HEIGHT - tmph) / 2;
 	j = HEIGHT / 2;
 	while (++ j < tmpe + tmph)
@@ -113,10 +118,11 @@ void	put_filars(t_core *main_struct, int *lista, int len)
 	main_struct->wid = 0;
 }
 
-void	create_win(void)
+void	create_win(t_hero *hero)
 {
 	t_core	main_struct;
 
+	main_struct.hero = hero;
 	main_struct.wid = 0;
 	main_struct.con = mlx_init();
 	main_struct.win = mlx_new_window(main_struct.con, WIDTH, HEIGHT, "cub3d");
@@ -126,24 +132,28 @@ void	create_win(void)
 	display_the_win(&main_struct);
 }
 
+
+
 void	display_the_win(t_core *main_struct)
 {
-	int lista[] = {90, 90, 90, 89, 89, 89, 88, 88, 87, 87, 86, 86, 85, 84, 84, 83, 82, 82, 81, 80, 79, 78, 77, 76, 74, 74,
-		72, 60, 61, 61, 61, 60, 58, 53, 50, 45, 41, 41, 41, 41, 41, 41, 41, 41, 41, 40, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41,
-		45, 49, 53, 57, 59, 62, 65, 67, 69, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 81, 82, 83, 84, 84, 85, 85, 86, 86, 87, 87, 88, 88, 89, 89};
-	int	len = sizeof(lista) / 4;
-	
+// 	int lista[] = {90, 90, 90, 89, 89, 89, 88, 88, 87, 87, 86, 86, 85, 84, 84, 83, 82, 82, 81, 80, 79, 78, 77, 76, 74, 74,
+// 		72, 60, 61, 61, 61, 60, 58, 53, 50, 45, 41, 41, 41, 41, 41, 41, 41, 41, 41, 40, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41,
+// 		45, 49, 53, 57, 59, 62, 65, 67, 69, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 81, 82, 83, 84, 84, 85, 85, 86, 86, 87, 87, 88, 88, 89, 89};
+	int	len = sizeof(main_struct->hero->vision) / 4;
+
 	// first put a image to window
-	put_filars(main_struct, lista, len);
+	put_filars(main_struct, main_struct->hero->vision, len);
 	// the hooks
+	// mlx_do_key_autorepeaton(main_struct->con);
 	mlx_hook(main_struct->win, 17, 0L, mlx_loop_end, main_struct->con);
-	mlx_key_hook(main_struct->win, my_key_hook, main_struct);
+	mlx_hook(main_struct->win, 2, 1L<<0, my_key_hook, main_struct);
+	// mlx_key_hook(main_struct->win, my_key_hook, main_struct);
 	mlx_loop(main_struct->con);
 	close_window(main_struct);
 }
 
-int	main(void)
-{
-	create_win();
-	return (0);
-}
+// int	main(void)
+// {
+// 	create_win();
+// 	return (0);
+// }

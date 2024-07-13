@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/12 19:55:15 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/13 20:21:54 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include <math.h>
 # include "mylibft/mylibft.h"
 
-# define HEIGHT 800
-# define WIDTH 1000
+# define HEIGHT 2000
+# define WIDTH 3000
 # define V_RANGE 45
-# define FILAR_SIZE 15
-# define FILWI 9
+# define FILAR_SIZE 20
+# define FILWI 20
 
 typedef struct s_axis
 {
@@ -44,7 +44,7 @@ typedef struct s_axis
 	int		e2;
 	double	degr;
 	int		colision[4];
-}	t_axis;
+}			t_axis;
 
 typedef struct s_hero
 {
@@ -57,7 +57,7 @@ typedef struct s_hero
 	int		angle;
 	int		walls[V_RANGE * 2];
 	int		vision[V_RANGE * 2];
-}	t_hero;
+}			t_hero;
 
 typedef struct s_core
 {
@@ -69,7 +69,18 @@ typedef struct s_core
 	int		bits_per_pixel;
 	int		line_length;
 	int		wid;
+	t_hero	*hero;
 }			t_core;
+
+typedef struct s_ft
+{
+	int		m1;
+	int		m2;
+	int		height;
+	int		i;
+	float	step;
+	int		steps;
+}			t_ft;
 
 void	find_start(t_hero *hero);
 double	cosine(int angle);
@@ -77,5 +88,11 @@ void	calc_axis(t_hero *hero, char type);
 void	print_map(t_hero *hero);
 void	calc_viev(t_hero *hero);
 void	ext_map(t_hero *hero);
+void	create_win(t_hero *hero);
+void	move_on_y(t_core *main_struct, int change);
+void	move_on_x(t_core *main_struct, int change);
+void	rotate(t_core *main_struct, int change);
+void	fine_tune_view(t_hero *hero);
+int		ft_abs(int num);
 
 #endif
