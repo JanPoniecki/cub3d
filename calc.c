@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:17:33 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/14 13:14:15 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/14 18:53:09 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,14 @@ void	wall_buffer(t_hero *hero, char type)
 		}
 		i ++;
 	}
+	if (hero->y_index < PILLOW)
+		hero->y_index = PILLOW;
+	if (hero->y_index + PILLOW > hero->y_end)
+		hero->y_index = hero->y_end - PILLOW;
+	if (hero->x_index < PILLOW)
+		hero->x_index = PILLOW;
+	if (hero->x_index + PILLOW > hero->x_end)
+		hero->x_index = hero->x_end - PILLOW;
 }
 
 void	set_axis_forward(t_hero *hero, t_axis *axis, char type)
@@ -215,6 +223,10 @@ void	set_axis_forward(t_hero *hero, t_axis *axis, char type)
 		insert_xy(hero, axis, type, i);
 		i ++;
 	}
+	if (type == 'y')
+		hero->y_end = i;
+	else
+		hero->x_end = i;
 	wall_buffer(hero, type);
 }
 

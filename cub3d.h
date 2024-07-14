@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/14 13:16:27 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/14 18:58:34 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define FILAR_SIZE 20
 # define FILWI 20
 # define DIVIDER 15000
+# define PILLOW 5
 
 typedef struct s_axis
 {
@@ -52,8 +53,10 @@ typedef struct s_hero
 	char	**map;
 	int		y_axis[500][2];
 	int		y_index;
+	int		y_end;
 	int		x_axis[500][2];
 	int		x_index;
+	int		x_end;
 	int		pos[2];
 	int		angle;
 	int		walls[V_RANGE * 2];

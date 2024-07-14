@@ -4,7 +4,7 @@ void	move_on_y(t_core *main_struct, int change)
 {
 	main_struct->hero->y_index += change;
 	int index = main_struct->hero->y_index;
-	if (index < 3 || main_struct->hero->y_axis[index + 3][0] == -1)
+	if (index < PILLOW || index + PILLOW > main_struct->hero->y_end)
 	{
 		main_struct->hero->y_index -= change;
 		return ;
@@ -19,7 +19,7 @@ void	move_on_x(t_core *main_struct, int change)
 {
 	main_struct->hero->x_index += change;
 	int index = main_struct->hero->x_index;
-	if (index < 3 || main_struct->hero->x_axis[index + 3][0] == -1)
+	if (index < PILLOW || index + PILLOW > main_struct->hero->x_end)
 	{
 		main_struct->hero->x_index -= change;
 		return ;
