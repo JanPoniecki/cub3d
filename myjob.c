@@ -81,17 +81,23 @@ int	my_key_hook(int keycode, t_core *mlx)
 	return (0);
 }
 
+int		set_color(t_core *main_struct, int hig, int i)
+{
+	int	transparency;
+	if (hig > 1000)
+		transparency = 0;
+	else
+		transparency = 100 - hig / 10;
+	return (transparency);
+}
+
 void	put_one_filar(t_core *main_struct, int i, int hig)
 {
 	int	j = -1;
 	int	tmp = i;
 	int	tmph = hig;
 	int	tmpe = (HEIGHT - tmph) / 2;
-	int	trans;
-	if (hig > 1000)
-		trans = 0;
-	else
-		trans = 100 - hig / 10;
+	int	trans = set_color(main_struct, hig, i);
 	j = HEIGHT / 2;
 	while (++ j < tmpe + tmph)
 	{
