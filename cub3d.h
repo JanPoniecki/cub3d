@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/13 20:21:54 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:16:27 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 # include "mylibft/mylibft.h"
 
 # define HEIGHT 2000
-# define WIDTH 3000
+# define WIDTH 2000
 # define V_RANGE 45
 # define FILAR_SIZE 20
 # define FILWI 20
+# define DIVIDER 15000
 
 typedef struct s_axis
 {
@@ -94,5 +95,7 @@ void	move_on_x(t_core *main_struct, int change);
 void	rotate(t_core *main_struct, int change);
 void	fine_tune_view(t_hero *hero);
 int		ft_abs(int num);
+int		int_color(unsigned char t, unsigned char r, \
+	unsigned char g, unsigned char b);
 
 #endif
