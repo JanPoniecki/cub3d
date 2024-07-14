@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ext_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:55:11 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/12 13:48:28 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:05:12 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define POW 1
+#define POW 3
 #define M_FILE "map_test"
 
 int	len_of_file(void)

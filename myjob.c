@@ -26,13 +26,13 @@ void for_arrows(int	keycode, t_core *mlx)
 {
 	if (keycode == 65361)
 	{
-		rotate(mlx, 5);
+		rotate(mlx, 4);
 		int len = sizeof(mlx->hero->vision) / 4;
 		put_filars(mlx, mlx->hero->vision, len);
 	}
 	else if (keycode == 65363)
 	{
-		rotate(mlx, -5);
+		rotate(mlx, -4);
 		int len = sizeof(mlx->hero->vision) / 4;
 		put_filars(mlx, mlx->hero->vision, len);
 	}
@@ -87,19 +87,24 @@ void	put_one_filar(t_core *main_struct, int i, int hig)
 	int	tmp = i;
 	int	tmph = hig;
 	int	tmpe = (HEIGHT - tmph) / 2;
+	int	trans;
+	if (hig > 1000)
+		trans = 0;
+	else
+		trans = 100 - hig / 10;
 	j = HEIGHT / 2;
 	while (++ j < tmpe + tmph)
 	{
 		i = tmp;
 		while (i < FILWI + tmp)
-			my_mlx_pixel_put(main_struct, i ++, j, 0x00FF00);
+			my_mlx_pixel_put(main_struct, i ++, j, int_color(0, 200 - trans, 200 - trans, 200 - trans));
 	}
 	j = HEIGHT / 2 + 1;
 	while (-- j > tmpe)
 	{
 		i = tmp;
 		while (i < FILWI + tmp)
-			my_mlx_pixel_put(main_struct, i ++, j, 0x00FFFF);
+			my_mlx_pixel_put(main_struct, i ++, j, int_color(0, 200 - trans, 200 - trans, 200 - trans));
 	}
 	main_struct->wid += FILWI;
 }
