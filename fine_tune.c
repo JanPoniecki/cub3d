@@ -11,20 +11,20 @@ void	find_min_max(int start, int stop, t_hero *hero)
 	max = 0;
 	while (i <= stop)
 	{
-		if (hero->vision[i] < min)
-			min = hero->vision[i];
-		if (hero->vision[i] > max)
-			max = hero->vision[i];
+		if (hero->vision_2[i] < min)
+			min = hero->vision_2[i];
+		if (hero->vision_2[i] > max)
+			max = hero->vision_2[i];
 		i ++;
 	}
-	if (hero->vision[start] < hero->vision[stop])
-		hero->vision[start] = min;
+	if (hero->vision_2[start] < hero->vision_2[stop])
+		hero->vision_2[start] = min;
 	else
-		hero->vision[start] = max;
-	if (hero->vision[start] > hero->vision[stop])
-		hero->vision[stop] = min;
+		hero->vision_2[start] = max;
+	if (hero->vision_2[start] > hero->vision_2[stop])
+		hero->vision_2[stop] = min;
 	else
-		hero->vision[stop] = max;
+		hero->vision_2[stop] = max;
 }
 
 // void	init_ft_vars(t_ft *ft, t_hero *hero)
@@ -38,9 +38,9 @@ void	refine_part(int start, int stop, t_hero *hero)
 	// t_ft	ft;
 
 	find_min_max(start, stop, hero);
-	int m1 = hero->vision[start];
-	int m2 = hero->vision[stop];
-	int height = hero->vision[start];
+	int m1 = hero->vision_2[start];
+	int m2 = hero->vision_2[stop];
+	int height = hero->vision_2[start];
 	int i = 0;
 	float step;
 	int steps = (stop - start);
@@ -50,11 +50,11 @@ void	refine_part(int start, int stop, t_hero *hero)
 		step = (float)(m1 - m2) / (float)steps;
 	else
 		step = (float)(m2 - m1) / (float)steps;
-	if (hero->vision[start] < hero->vision[stop])
+	if (hero->vision_2[start] < hero->vision_2[stop])
 	{
 		while (start != stop)
 		{
-			hero->vision[start] = height + step * i;
+			hero->vision_2[start] = height + step * i;
 			i ++;
 			start ++;
 		}
@@ -63,7 +63,7 @@ void	refine_part(int start, int stop, t_hero *hero)
 	{
 		while (start != stop)
 		{
-			hero->vision[start] = height - step * i;
+			hero->vision_2[start] = height - step * i;
 			i ++;
 			start ++;
 		}
@@ -80,13 +80,13 @@ void	fine_tune_view(t_hero *hero)
 	i = 1;
 	j = 0;
 	n = 0;
-	last = hero->walls[0];
-	while (i < V_RANGE * 2)
+	last = hero->walls_2[0];
+	while (i < V_RANGE * 2 * FILWI)
 	{
-		while (last == hero->walls[i])
+		while (last == hero->walls_2[i])
 			i++;
 		refine_part(j, i - 1, hero);
-		last = hero->walls[i];
+		last = hero->walls_2[i];
 		j = i;
 		n ++;
 		i ++;

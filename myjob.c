@@ -27,14 +27,14 @@ void for_arrows(int	keycode, t_core *mlx)
 	if (keycode == 65361)
 	{
 		rotate(mlx, 4);
-		int len = sizeof(mlx->hero->vision) / 4;
-		put_filars(mlx, mlx->hero->vision, len);
+		int len = sizeof(mlx->hero->vision_2) / 4;
+		put_filars(mlx, mlx->hero->vision_2, len);
 	}
 	else if (keycode == 65363)
 	{
 		rotate(mlx, -4);
-		int len = sizeof(mlx->hero->vision) / 4;
-		put_filars(mlx, mlx->hero->vision, len);
+		int len = sizeof(mlx->hero->vision_2) / 4;
+		put_filars(mlx, mlx->hero->vision_2, len);
 	}
 }
 
@@ -56,26 +56,26 @@ int	my_key_hook(int keycode, t_core *mlx)
 	else if (keycode == 119)
 	{
 		move_on_y(mlx, 1);
-		int len = sizeof(mlx->hero->vision) / 4;
-		put_filars(mlx, mlx->hero->vision, len);
+		int len = sizeof(mlx->hero->vision_2) / 4;
+		put_filars(mlx, mlx->hero->vision_2, len);
 	}
 	else if (keycode == 115)
 	{
 		move_on_y(mlx, - 1);
-		int len = sizeof(mlx->hero->vision) / 4;
-		put_filars(mlx, mlx->hero->vision, len);
+		int len = sizeof(mlx->hero->vision_2) / 4;
+		put_filars(mlx, mlx->hero->vision_2, len);
 	}
 	else if (keycode == 97)
 	{
 		move_on_x(mlx, - 1);
-		int len = sizeof(mlx->hero->vision) / 4;
-		put_filars(mlx, mlx->hero->vision, len);
+		int len = sizeof(mlx->hero->vision_2) / 4;
+		put_filars(mlx, mlx->hero->vision_2, len);
 	}
 	else if (keycode == 100)
 	{
 		move_on_x(mlx, 1);
-		int len = sizeof(mlx->hero->vision) / 4;
-		put_filars(mlx, mlx->hero->vision, len);
+		int len = sizeof(mlx->hero->vision_2) / 4;
+		put_filars(mlx, mlx->hero->vision_2, len);
 	}
 	for_arrows(keycode, mlx);
 	return (0);
@@ -83,12 +83,19 @@ int	my_key_hook(int keycode, t_core *mlx)
 
 int		set_color(t_core *main_struct, int hig, int i)
 {
-	int	transparency;
-	if (hig > 1000)
-		transparency = 0;
+	int	trans;
+	if (hig > 2000)
+		trans = 0;
 	else
-		transparency = 100 - hig / 10;
-	return (transparency);
+		trans = 124 - hig / 20;
+	if (main_struct->hero->walls_2[i] / 10000 == 1)
+		return (int_color(0, 255 - trans, 228 - trans, 124 - trans));
+	if (main_struct->hero->walls_2[i] / 10000 == 2)
+		return (int_color(0, 228 - trans, 200 - trans, 163 - trans));
+	if (main_struct->hero->walls_2[i] / 10000 == 3)
+		return (int_color(0, 228 - trans, 241 - trans, 223 - trans));
+	else
+		return (int_color(0, 200 - trans, 200 - trans, 200 - trans));
 }
 
 void	put_one_filar(t_core *main_struct, int i, int hig)
@@ -102,17 +109,17 @@ void	put_one_filar(t_core *main_struct, int i, int hig)
 	while (++ j < tmpe + tmph)
 	{
 		i = tmp;
-		while (i < FILWI + tmp)
-			my_mlx_pixel_put(main_struct, i ++, j, int_color(0, 200 - trans, 200 - trans, 200 - trans));
+		while (i < 1 + tmp)
+			my_mlx_pixel_put(main_struct, i ++, j, set_color(main_struct, hig, i));
 	}
 	j = HEIGHT / 2 + 1;
 	while (-- j > tmpe)
 	{
 		i = tmp;
-		while (i < FILWI + tmp)
-			my_mlx_pixel_put(main_struct, i ++, j, int_color(0, 200 - trans, 200 - trans, 200 - trans));
+		while (i < 1 + tmp)
+			my_mlx_pixel_put(main_struct, i ++, j, set_color(main_struct, hig, i));
 	}
-	main_struct->wid += FILWI;
+	main_struct->wid += 1;
 }
 
 void	put_filars(t_core *main_struct, int *lista, int len)
@@ -150,10 +157,10 @@ void	display_the_win(t_core *main_struct)
 // 	int lista[] = {90, 90, 90, 89, 89, 89, 88, 88, 87, 87, 86, 86, 85, 84, 84, 83, 82, 82, 81, 80, 79, 78, 77, 76, 74, 74,
 // 		72, 60, 61, 61, 61, 60, 58, 53, 50, 45, 41, 41, 41, 41, 41, 41, 41, 41, 41, 40, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41,
 // 		45, 49, 53, 57, 59, 62, 65, 67, 69, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 81, 82, 83, 84, 84, 85, 85, 86, 86, 87, 87, 88, 88, 89, 89};
-	int	len = sizeof(main_struct->hero->vision) / 4;
+	int	len = sizeof(main_struct->hero->vision_2) / 4;
 
 	// first put a image to window
-	put_filars(main_struct, main_struct->hero->vision, len);
+	put_filars(main_struct, main_struct->hero->vision_2, len);
 	// the hooks
 	// mlx_do_key_autorepeaton(main_struct->con);
 	mlx_hook(main_struct->win, 17, 0L, mlx_loop_end, main_struct->con);
