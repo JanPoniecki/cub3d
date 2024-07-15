@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:17:33 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/14 18:53:09 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/15 21:53:32 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,7 +303,7 @@ void	get_collision(t_hero *hero, int angle, int i)
 	height = calc_height(hero, &axis, i);
 	if (height > HEIGHT)
 		height = HEIGHT;
-	hero->vision[V_RANGE * 2 - 1 - i] = height;
+	hero->vision[V_RANGE * 2 - 1 - i]= height;
 }
 
 void	calc_viev(t_hero *hero)
@@ -312,7 +312,7 @@ void	calc_viev(t_hero *hero)
 	int	i;
 
 	// printf("%d %d\n", hero->pos[0], hero->pos[1]);
-	ft_bzero(hero->vision, V_RANGE * 2);
+	// ft_bzero(hero->vision, V_RANGE * 2);
 	angle = hero->angle - V_RANGE;
 	i = 0;
 	while (i != V_RANGE * 2)
@@ -321,6 +321,30 @@ void	calc_viev(t_hero *hero)
 		i ++;
 		angle ++;
 	}
+	i = 0;
+	int j = 0;
+	int k = 0;
+	while (i < V_RANGE * 2)
+	{
+		while (j < FILWI)
+		{
+			hero->vision_2[k] = hero->vision[i];
+			hero->walls_2[k] = hero->walls[i];
+			j ++;
+			k ++;
+		}
+		j = 0;
+		i ++;
+	}
+	j = 0;
+	// while (j < V_RANGE * 2 * FILWI)
+	// {
+	// 	printf("%d; ", hero->vision_2[j]);
+	// 	printf("%d; ", hero->walls_2[j]);
+	// 	j ++;
+	// }
+	// printf("----------------\n\n");
+	// exit(0);
 	fine_tune_view(hero);
 	// i = 0;
 	// while (i != V_RANGE * 2)

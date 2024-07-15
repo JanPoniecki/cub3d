@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/14 18:58:34 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:20:47 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ typedef struct s_hero
 	int		x_end;
 	int		pos[2];
 	int		angle;
-	int		walls[V_RANGE * 2];
-	int		vision[V_RANGE * 2];
+	int		walls[V_RANGE * 2 + 10];
+	int		walls_2[V_RANGE * 2 * FILWI];
+	int		vision_2[V_RANGE * 2 * FILWI];
+	int		vision[V_RANGE * 2 + 10];
 }			t_hero;
 
 typedef struct s_core
