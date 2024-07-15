@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 08:46:31 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/15 12:04:55 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/15 13:51:22 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,18 +131,12 @@ void	free_map(t_map *map)
 		free_list(map->c);
 }
 
-void	read_map(t_map *map)
+void	while_loop(int fd, int fd_out, char **s_line, t_map *map)
 {
-	int		fd;
 	char	*line;
-	char	**s_line;
-	char	fd_out;
 	int		fl;
 
 	fl = 0;
-	fd_out = open("out", O_WRONLY | O_CREAT, 0644);
-	map->flag = 0;
-	fd = open(MAPF, O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -152,7 +146,6 @@ void	read_map(t_map *map)
 			write(fd_out, line, ft_strlen(line));
 		else if (line[0] != '\n')
 		{
-			printf("%s", line);
 			line[ft_strlen(line) - 1] = '\0';
 			s_line = ft_split(line, ' ');
 			if (check_line(s_line, line, fd, map) || colors(s_line, map))
@@ -162,6 +155,18 @@ void	read_map(t_map *map)
 		free(line);
 		line = get_next_line(fd);
 	}
+}
+
+void	read_map(t_map *map)
+{
+	int		fd;
+	char	**s_line;
+	char	fd_out;
+
+	fd_out = open("out", O_WRONLY | O_CREAT, 0644);
+	map->flag = 0;
+	fd = open(MAPF, O_RDONLY);
+	while_loop(fd, fd_out, s_line, map);
 	close(fd);
 	close(fd_out);
 	if (map->flag == 1 || map->f == NULL || map->c == NULL)
@@ -176,6 +181,7 @@ void	read_map(t_map *map)
 // the "main" function is the read_map
 // it will read the date from file and write to 
 // strutc t_map
+
 int	main(void)
 {
 	t_map	map;
@@ -188,6 +194,12 @@ int	main(void)
 	map.f = NULL;
 	map.c = NULL;
 	read_map(&map);
+	printf("%s\n", map.no);
+	printf("%s\n", map.so);
+	printf("%s\n", map.we);
+	printf("%s\n", map.ea);
+	printf("%s\n", map.f[0]);
+	printf("%s\n", map.c[0]);
 	free_map(&map);
 	ext_map(&hero);
 	int	i = 0;
