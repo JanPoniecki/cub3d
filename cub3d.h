@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/15 11:41:02 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/15 15:31:21 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define DIVIDER 15000
 # define PILLOW 5
 # define MAPF "test_map.cub"
+#define M_FILE "out"
 
 typedef struct s_axis
 {

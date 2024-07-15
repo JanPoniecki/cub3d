@@ -6,14 +6,13 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:55:11 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/15 12:08:26 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/15 15:31:15 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 #define POW 3
-#define M_FILE "out"
 
 int	len_of_file(void)
 {
