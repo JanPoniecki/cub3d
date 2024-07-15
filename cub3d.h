@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/14 18:58:34 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:41:02 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "mylibft/mylibft.h"
+# include <errno.h>
 
 # define HEIGHT 2000
 # define WIDTH 2000
@@ -28,6 +29,7 @@
 # define FILWI 20
 # define DIVIDER 15000
 # define PILLOW 5
+# define MAPF "test_map.cub"
 
 typedef struct s_axis
 {
@@ -85,6 +87,17 @@ typedef struct s_ft
 	float	step;
 	int		steps;
 }			t_ft;
+
+typedef struct s_map
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	**f;
+	char	**c;
+	int		flag;
+}			t_map;
 
 void	find_start(t_hero *hero);
 double	cosine(int angle);

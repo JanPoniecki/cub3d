@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ext_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:55:11 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/14 13:05:12 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/15 12:08:26 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 #define POW 3
-#define M_FILE "map_test"
+#define M_FILE "out"
 
 int	len_of_file(void)
 {
@@ -93,7 +93,7 @@ void	change_the_map(t_hero *hero, int i, int j)
 					&& (hero->map[i][j + 1] == '0'
 					|| hero->map[i][j + 1] == 'S'))
 					hero->map[i][j] = '4';
-				else if (i > 0 && (hero->map[i - 1][j] == '0'
+				else if (i - 1 >= 0 && (hero->map[i - 1][j] == '0'
 					|| hero->map[i - 1][j] == 'S'))
 					hero->map[i][j] = '3';
 			}
