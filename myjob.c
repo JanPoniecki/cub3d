@@ -102,6 +102,8 @@ void	put_one_filar(t_core *main_struct, int i, int hig)
 {
 	int	j = -1;
 	int	tmp = i;
+	if (hig > HEIGHT)
+		hig = HEIGHT;
 	int	tmph = hig;
 	int	tmpe = (HEIGHT - tmph) / 2;
 	int	trans = set_color(main_struct, hig, i);

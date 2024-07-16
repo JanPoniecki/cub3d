@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/15 20:20:47 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/16 20:30:22 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,17 @@
 # include <fcntl.h>
 # include <math.h>
 # include "mylibft/mylibft.h"
+# include <errno.h>
 
-# define HEIGHT 2000
+# define HEIGHT 1080
 # define WIDTH 2000
 # define V_RANGE 45
 # define FILAR_SIZE 20
 # define FILWI 20
 # define DIVIDER 15000
 # define PILLOW 5
+# define MAPF "test_map.cub"
+#define M_FILE "out"
 
 typedef struct s_axis
 {
@@ -60,6 +63,8 @@ typedef struct s_hero
 	int		pos[2];
 	int		angle;
 	int		walls[V_RANGE * 2 + 10];
+	int		walls_x[V_RANGE * 2 + 10];
+	int		walls_y[V_RANGE * 2 + 10];
 	int		walls_2[V_RANGE * 2 * FILWI];
 	int		vision_2[V_RANGE * 2 * FILWI];
 	int		vision[V_RANGE * 2 + 10];
@@ -88,6 +93,17 @@ typedef struct s_ft
 	int		steps;
 }			t_ft;
 
+typedef struct s_map
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	**f;
+	char	**c;
+	int		flag;
+}			t_map;
+
 void	find_start(t_hero *hero);
 double	cosine(int angle);
 void	calc_axis(t_hero *hero, char type);
@@ -102,5 +118,15 @@ void	fine_tune_view(t_hero *hero);
 int		ft_abs(int num);
 int		int_color(unsigned char t, unsigned char r, \
 	unsigned char g, unsigned char b);
+
+int		len_of_file(char *file);
+int		list_len(char **lista);
+void	initilize_map(t_map *map);
+void	free_map(t_map *map);
+void	free_list(char **lista);
+
+void	ext_map(t_hero *hero);
+void	checker(t_hero *hero, t_map *map);
+void	read_map(t_map *map);
 
 #endif

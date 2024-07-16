@@ -2,21 +2,22 @@
 
 int	main(void)
 {
-	int	i;
-
+	t_map	map;
 	t_hero	hero;
+
+	initilize_map(&map);
+	read_map(&map);
 	ext_map(&hero);
+	checker(&hero, &map);
+
 	find_start(&hero);
 	calc_axis(&hero, 'y');
 	calc_axis(&hero, 'x');
 	calc_viev(&hero);
-	// exit (0);
 	create_win(&hero);
-	i = 0;
-	while (hero.map[i])
-	{
-		printf("%s\n", hero.map[i]);
-		free(hero.map[i ++]);
-	}
-	free(hero.map);
+
+	free_list(hero.map);
+	free_map(&map);
+
+	printf("The map is ok, the program finished!");
 }

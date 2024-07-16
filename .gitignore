@@ -13,3 +13,4 @@ mylibft/get_next_line/*.o
 mylibft/get_next_line/*.a
 mylibft/libft/libft.a
 a.out
+out
