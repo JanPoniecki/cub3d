@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 08:46:31 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/16 09:52:48 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/16 10:08:22 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,32 +193,32 @@ void	read_map(t_map *map)
 // it will read the date from file and write to 
 // strutc t_map
 
-int	main(void)
-{
-	t_map	map;
-	t_hero	hero;
+// int	main(void)
+// {
+// 	t_map	map;
+// 	t_hero	hero;
 
-	map.no = NULL;
-	map.so = NULL;
-	map.we = NULL;
-	map.ea = NULL;
-	map.f = NULL;
-	map.c = NULL;
-	read_map(&map);
-	printf("%s\n", map.no);
-	printf("%s\n", map.so);
-	printf("%s\n", map.we);
-	printf("%s\n", map.ea);
-	printf("%s\n", map.f[0]);
-	printf("%s\n", map.c[0]);
-	free_map(&map);
-	// ext_map(&hero);
-	// int	i = 0;
-	// i = 0;
-	// while (hero.map[i])
-	// {
-	// 	printf("%s\n", hero.map[i]);
-	// 	free(hero.map[i ++]);
-	// }
-	// free(hero.map);
-}
+// 	map.no = NULL;
+// 	map.so = NULL;
+// 	map.we = NULL;
+// 	map.ea = NULL;
+// 	map.f = NULL;
+// 	map.c = NULL;
+// 	read_map(&map);
+// 	printf("%s\n", map.no);
+// 	printf("%s\n", map.so);
+// 	printf("%s\n", map.we);
+// 	printf("%s\n", map.ea);
+// 	printf("%s\n", map.f[0]);
+// 	printf("%s\n", map.c[0]);
+// 	free_map(&map);
+// 	ext_map(&hero);
+// 	int	i = 0;
+// 	i = 0;
+// 	while (hero.map[i])
+// 	{
+// 		printf("%s\n", hero.map[i]);
+// 		free(hero.map[i ++]);
+// 	}
+// 	free(hero.map);
+// }
