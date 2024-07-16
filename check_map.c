@@ -6,12 +6,14 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:29:44 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/15 15:56:32 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/16 09:33:33 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// that is only checking if there is only
+// valid characters
 int	check_for_wrong(void)
 {
 	int		fd;

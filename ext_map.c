@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:55:11 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/15 16:02:27 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/16 09:42:24 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	change_the_map(t_hero *hero, int i, int j)
 		{
 			if (hero->map[i][j] == ' ')
 				hero->map[i][j] = '1';
-			else if (hero->map[i][j] == '1')
+			if (hero->map[i][j] == '1')
 			{
 				if (j > 0 && (hero->map[i][j - 1] == '0'
 					|| hero->map[i][j - 1] == 'S'))
@@ -136,18 +136,18 @@ void	ext_map(t_hero *hero)
 // potrzebuje ona tylko t_hero
 // zaalokuje pamiec dla mapy oraz
 // zmieni jej liczby na poprawne
-int	main(void)
-{
-	int	i;
+// int	main(void)
+// {
+// 	int	i;
 
-	i = 0;
-	t_hero hero;
-	ext_map(&hero);
-	i = 0;
-	while (hero.map[i])
-	{
-		printf("%s\n", hero.map[i]);
-		free(hero.map[i ++]);
-	}
-	free(hero.map);
-}
+// 	i = 0;
+// 	t_hero hero;
+// 	ext_map(&hero);
+// 	i = 0;
+// 	while (hero.map[i])
+// 	{
+// 		printf("%s\n", hero.map[i]);
+// 		free(hero.map[i ++]);
+// 	}
+// 	free(hero.map);
+// }
