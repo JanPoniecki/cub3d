@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:55:20 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/16 17:13:54 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:19:47 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ int	main(void)
 
 	ext_map(&hero);
 	checker(&hero, &map);
+	
+	find_start(&hero);
+	calc_axis(&hero, 'y');
+	calc_axis(&hero, 'x');
+	calc_viev(&hero);
+	create_win(&hero);
 	
 	free_list(hero.map);
 	free_map(&map);
