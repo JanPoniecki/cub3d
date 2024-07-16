@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/15 15:59:37 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:14:33 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,15 @@ void	fine_tune_view(t_hero *hero);
 int		ft_abs(int num);
 int		int_color(unsigned char t, unsigned char r, \
 	unsigned char g, unsigned char b);
+
+int		len_of_file(char *file);
+int		list_len(char **lista);
+void	initilize_map(t_map *map);
+void	free_map(t_map *map);
+void	free_list(char **lista);
+
+void	ext_map(t_hero *hero);
+void	checker(t_hero *hero, t_map *map);
+void	read_map(t_map *map);
 
 #endif

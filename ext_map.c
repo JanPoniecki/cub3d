@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:55:11 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/16 09:53:46 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:33:23 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 #define POW 3
 
-int	len_of_file(void)
+int	len_of_file(char *file)
 {
 	int		fd;
 	int		i;
 	char	*buf;
 
 	i = 0;
-	fd = open(M_FILE, O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (!fd)
 		return (-1);
 	while (1)
@@ -78,6 +78,9 @@ void	ext_col(t_hero *hero, int *i, int len)
 
 void	change_the_map(t_hero *hero, int i, int j)
 {
+	int	len_f;
+
+	len_f = list_len(hero->map);
 	while (hero->map[i])
 	{
 		j = 0;
@@ -86,13 +89,34 @@ void	change_the_map(t_hero *hero, int i, int j)
 			if (hero->map[i][j] == '1')
 			{
 				if (j > 0 && (hero->map[i][j - 1] == '0'
+					|| hero->map[i][j - 1] == 'S')
+					&& (hero->map[i - 1][j] == '0'
+					|| hero->map[i - 1][j] == 'S'))
+					hero->map[i][j] = '5';
+				else if (hero->map[i][j + 1] != '\0'
+					&& (hero->map[i][j + 1] == '0'
+					|| hero->map[i][j + 1] == 'S')
+					&& (hero->map[i - 1][j] == '0'
+					|| hero->map[i - 1][j] == 'S'))
+					hero->map[i][j] = '6';
+				else if (i + 1 < len_f && (hero->map[i + 1][j] == '0'
+					|| hero->map[i + 1][j] == 'S')
+					&& (hero->map[i][j - 1] == '0'
+					|| hero->map[i][j - 1] == 'S'))
+					hero->map[i][j] = '7';
+				else if (i + 1 < len_f && (hero->map[i + 1][j] == '0'
+					|| hero->map[i + 1][j] == 'S')
+					&& (hero->map[i][j + 1] == '0'
+					|| hero->map[i][j + 1] == 'S'))
+					hero->map[i][j] = '8';
+				else if (j > 0 && (hero->map[i][j - 1] == '0'
 					|| hero->map[i][j - 1] == 'S'))
 					hero->map[i][j] = '2';
 				else if (hero->map[i][j + 1] != '\0'
 					&& (hero->map[i][j + 1] == '0'
 					|| hero->map[i][j + 1] == 'S'))
 					hero->map[i][j] = '4';
-				else if (i - 1 >= 0 && (hero->map[i - 1][j] == '0'
+				else if (i - 1 > 0 && (hero->map[i - 1][j] == '0'
 					|| hero->map[i - 1][j] == 'S'))
 					hero->map[i][j] = '3';
 			}
@@ -110,7 +134,7 @@ void	ext_map(t_hero *hero)
 	int		len_f;
 	int		i;
 
-	len_f = len_of_file();
+	len_f = len_of_file(M_FILE);
 	if (len_f == -1)
 		exit (0);
 	hero->map = malloc(sizeof(char *) * ((len_f * POW) + 1));

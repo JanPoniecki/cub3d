@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 08:46:31 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/16 10:08:22 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:06:52 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,16 @@ void	read_map(t_map *map)
 		free_map(map);
 		exit(1);
 	}
+}
+
+void	initilize_map(t_map *map)
+{
+	map->no = NULL;
+	map->so = NULL;
+	map->we = NULL;
+	map->ea = NULL;
+	map->f = NULL;
+	map->c = NULL;
 }
 
 // the "main" function is the read_map
