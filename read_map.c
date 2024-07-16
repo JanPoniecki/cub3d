@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 08:46:31 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/16 09:43:17 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/16 09:52:48 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,17 @@ void	free_map(t_map *map)
 		free_list(map->c);
 }
 
+void	write_to_file(int i, char *line, int fd_out)
+{
+	while (line[++ i])
+	{
+		if (line[i] == ' ')
+			write(fd_out, "1", 1);
+		else
+			write(fd_out, &line[i], 1);
+	}
+}
+
 void	while_loop(int fd, int fd_out, char **s_line, t_map *map)
 {
 	char	*line;
@@ -143,7 +154,7 @@ void	while_loop(int fd, int fd_out, char **s_line, t_map *map)
 		if (line[0] == ' ' || line[0] == '1' || line[0] == '0')
 			fl = 1;
 		if (fl == 1)
-			write(fd_out, line, ft_strlen(line));
+			write_to_file(-1, line, fd_out);
 		else if (line[0] != '\n')
 		{
 			line[ft_strlen(line) - 1] = '\0';

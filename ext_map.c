@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:55:11 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/16 09:42:24 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/16 09:53:46 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void	change_the_map(t_hero *hero, int i, int j)
 		j = 0;
 		while (hero->map[i][j])
 		{
-			if (hero->map[i][j] == ' ')
-				hero->map[i][j] = '1';
 			if (hero->map[i][j] == '1')
 			{
 				if (j > 0 && (hero->map[i][j - 1] == '0'
