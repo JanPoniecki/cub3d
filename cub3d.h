@@ -76,8 +76,7 @@ typedef struct s_hero
 	int		pos[2];
 	int		angle;
 	int		walls[V_RANGE * 2 + 10];
-	int		walls_x[V_RANGE * 2 + 10];
-	int		walls_y[V_RANGE * 2 + 10];
+	int		walls_c[V_RANGE * 2 + 10][2];
 	int		walls_2[V_RANGE * 2 * FILWI];
 	int		vision_2[V_RANGE * 2 * FILWI];
 	int		vision[V_RANGE * 2 + 10];

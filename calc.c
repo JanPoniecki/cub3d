@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:17:33 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/16 23:18:00 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/17 22:34:36 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	find_collision(t_hero *hero, t_axis *axis, int i)
 				hero->walls[V_RANGE * 2 - 1 - i] = ((axis->colision[2] - 48) * 10000 + axis->x0);
 			else
 				hero->walls[V_RANGE * 2 - 1 - i] = ((axis->colision[2] - 48) * 10000 + axis->y0);
-			hero->walls_x[V_RANGE * 2 - 1 - i] = axis->x0;
-			hero->walls_y[V_RANGE * 2 - 1 - i] = axis->y0;
+			hero->walls_c[V_RANGE * 2 - 1 - i][0] = axis->x0;
+			hero->walls_c[V_RANGE * 2 - 1 - i][1] = axis->y0;
 			return ;
 		}
 		axis->e2 = 2 * axis->err;
@@ -308,41 +308,37 @@ void	get_collision(t_hero *hero, int angle, int i)
 	hero->vision[V_RANGE * 2 - 1 - i]= height;
 }
 
+void	check_neighbour_1(t_hero *hero, int i, int w, int h)
+{
+	if (i > 0)
+	{
+		if (hero->walls[i - 1] / 10000 == 1 || hero->walls[i - 1] / 10000 == 3)
+		{
+			if (ft_abs(hero->walls[i - 1] % 10000 - hero->walls_c[i][0]) <= 1)
+			{
+				hero->vision[i - 1] = hero->vision[i];
+				w = hero->walls[i - 1];
+				while (hero->walls[i] / 10000 > 4)
+				{
+					hero->walls[i] = w;
+					i ++;
+				}
+			}
+		}
+	}
+}
+
 void	handle_corners(t_hero *hero)
 {
 	int	i;
-	int	h;
-	int	w;
-	int	c;
-	int	x;
-	int	y;
 
 	i = 0;
-	c = 0;
 	while (i < V_RANGE * 2)
 	{
 		if (hero->walls[i] / 10000 > 4)
 		{
-			h = hero->vision[i];
-			w = hero->walls[i - 1];
-			if (i > 0 && ft_abs(hero->walls_x[i] - hero->walls_x[i - 1]) < 5 && ft_abs(hero->walls_y[i] - hero->walls_y[i - 1]) < 5)
-			{
-				hero->vision[i - 1] = h;
-				x = hero->walls_x[i - 1];
-				y = hero->walls_y[i - 1];
-			}
-			else
-				return ;
-			while (hero->walls[i] / 10000 > 4 && i < V_RANGE * 2)
-			{
-				hero->vision[i] = h + 1;
-				hero->walls[i] = w;
-				i ++;
-			}
-			if (i < V_RANGE * 2 && ft_abs(hero->walls_x[i] - x) < 2 && ft_abs(hero->walls_y[i] - y) < 2)
-			{
-				hero->vision[i] = h;
-			}
+			if (i > 0)
+				check_neighbour_1(hero, i, 0, 0);
 		}
 		i ++;
 	}
@@ -363,7 +359,7 @@ void	calc_viev(t_hero *hero)
 		i ++;
 		angle ++;
 	}
-	// handle_corners(hero);
+	handle_corners(hero);
 	i = 0;
 	int j = 0;
 	int k = 0;

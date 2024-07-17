@@ -127,13 +127,13 @@ void	put_one_filar(t_core *main_struct, int i, int hig)
 	int	trans = set_color(main_struct, hig, i);
 	j = HEIGHT / 2;
 	// ceiling
-	int	a = -1;
-	while (++a < j)
-	{
-		i = tmp;
-		while (i < 1 + tmp)
-			my_mlx_pixel_put(main_struct, i ++, a, my_strtol(main_struct->hero->ma->ceiling));
-	}
+	// int	a = -1;
+	// while (++a < j)
+	// {
+	// 	i = tmp;
+	// 	while (i < 1 + tmp)
+	// 		my_mlx_pixel_put(main_struct, i ++, a, my_strtol(main_struct->hero->ma->ceiling));
+	// }
 	// walls
 	while (++ j < tmpe + tmph)
 	{
@@ -149,13 +149,13 @@ void	put_one_filar(t_core *main_struct, int i, int hig)
 			my_mlx_pixel_put(main_struct, i, j, set_color(main_struct, hig, i));
 	}
 	// floor
-	j = tmpe + tmph;
-	while (++ j < HEIGHT)
-	{
-		i = tmp;
-		while (i < 1 + tmp)
-			my_mlx_pixel_put(main_struct, i ++, j, my_strtol(main_struct->hero->ma->floor));
-	}
+	// j = tmpe + tmph;
+	// while (++ j < HEIGHT)
+	// {
+	// 	i = tmp;
+	// 	while (i < 1 + tmp)
+	// 		my_mlx_pixel_put(main_struct, i ++, j, my_strtol(main_struct->hero->ma->floor));
+	// }
 	main_struct->wid += 1;
 }
 
