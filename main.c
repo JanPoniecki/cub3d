@@ -15,21 +15,6 @@ int	main(void)
 	calc_axis(&hero, 'x');
 	calc_viev(&hero);
 	hero.ma = &map;
-	printf("%s\n", map.no);
-	printf("%s\n", map.so);
-	printf("%s\n", map.we);
-	printf("%s\n", map.ea);
-	printf("%s\n", map.f[0]);
-	printf("%s\n", map.f[1]);
-	printf("%s\n", map.f[2]);
-	printf("%s\n", map.c[0]);
-	printf("%s\n", map.c[1]);
-	printf("%s\n", map.c[2]);
-	printf("%s\n", map.ceiling);
-	printf("%s\n", map.floor);
-	int	i = 0;
-	while (hero.map[i])
-		printf("%s\n", hero.map[i ++]);
 	create_win(&hero);
 	
 	free_list(hero.map);

@@ -34,6 +34,8 @@ void	close_window(t_core *mlx)
 	mlx_destroy_window(mlx->con, mlx->win);
 	mlx_destroy_display(mlx->con);
 	free(mlx->con);
+	free_list(mlx->hero->map);
+	free_map(mlx->hero->ma);
 	exit (0);
 }
 
