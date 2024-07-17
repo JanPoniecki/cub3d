@@ -27,6 +27,9 @@ int	main(void)
 	printf("%s\n", map.c[2]);
 	printf("%s\n", map.ceiling);
 	printf("%s\n", map.floor);
+	int	i = 0;
+	while (hero.map[i])
+		printf("%s\n", hero.map[i ++]);
 	create_win(&hero);
 	
 	free_list(hero.map);

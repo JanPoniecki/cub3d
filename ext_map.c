@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ext_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:55:11 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/16 20:28:21 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/17 13:59:56 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,27 +88,19 @@ void	change_the_map(t_hero *hero, int i, int j)
 		{
 			if (hero->map[i][j] == '1')
 			{
-				if (j > 0 && (hero->map[i][j - 1] == '0'
-					|| hero->map[i][j - 1] == 'S')
-					&& (hero->map[i - 1][j] == '0'
-					|| hero->map[i - 1][j] == 'S'))
-					hero->map[i][j] = '5';
-				else if (hero->map[i][j + 1] != '\0'
-					&& (hero->map[i][j + 1] == '0'
-					|| hero->map[i][j + 1] == 'S')
-					&& (hero->map[i - 1][j] == '0'
-					|| hero->map[i - 1][j] == 'S'))
-					hero->map[i][j] = '6';
-				else if (i + 1 < len_f && (hero->map[i + 1][j] == '0'
-					|| hero->map[i + 1][j] == 'S')
-					&& (hero->map[i][j - 1] == '0'
-					|| hero->map[i][j - 1] == 'S'))
-					hero->map[i][j] = '7';
-				else if (i + 1 < len_f && (hero->map[i + 1][j] == '0'
-					|| hero->map[i + 1][j] == 'S')
-					&& (hero->map[i][j + 1] == '0'
-					|| hero->map[i][j + 1] == 'S'))
-					hero->map[i][j] = '8';
+				if (((i - 1 >= 0 && ft_strlen(hero->map[i]) > j + 1 && ft_strlen(hero->map[i - 1]) > j)
+					&& ((hero->map[i - 1][j]  == '0' && hero->map[i][j + 1] == '0'
+					|| (hero->map[i - 1][j + 1]  == '0' && hero->map[i - 1][j] != '0' && hero->map[i][j + 1] != '0'))))
+					|| ((list_len(hero->map) > i + 1 && ft_strlen(hero->map[i]) > j + 1)
+					&& ((hero->map[i + 1][j]  == '0' && hero->map[i][j + 1] == '0')
+					|| (hero->map[i + 1][j + 1]  == '0' && hero->map[i][j + 1] != '0' && hero->map[i + 1][j] != '0')))
+					|| ((list_len(hero->map) > i + 1 && j - 1 > 0)
+					&& ((hero->map[i + 1][j]  == '0' && hero->map[i][j - 1] == '0')
+					|| (hero->map[i + 1][j - 1]  == '0' && hero->map[i][j - 1] != '0' && hero->map[i + 1][j] != '0')))
+					|| ((j - 1 >= 0 && i - 1 >= 0)
+					&& ((hero->map[i - 1][j]  == '0' && hero->map[i][j - 1] == '0')
+					|| (hero->map[i - 1][j - 1]  == '0' && hero->map[i - 1][j] != '0' && hero->map[i][j - 1] != '0'))))
+					hero->map[i][j] = '9';
 				else if (j > 0 && (hero->map[i][j - 1] == '0'
 					|| hero->map[i][j - 1] == 'S'))
 					hero->map[i][j] = '2';
