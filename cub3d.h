@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/16 20:30:22 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:54:13 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ typedef struct s_axis
 	int		colision[4];
 }			t_axis;
 
+typedef struct s_map
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	**f;
+	char	**c;
+	char	*floor;
+	char	*ceiling;
+	int		flag;
+}			t_map;
+
 typedef struct s_hero
 {
 	char	**map;
@@ -68,6 +81,7 @@ typedef struct s_hero
 	int		walls_2[V_RANGE * 2 * FILWI];
 	int		vision_2[V_RANGE * 2 * FILWI];
 	int		vision[V_RANGE * 2 + 10];
+	t_map	*ma;
 }			t_hero;
 
 typedef struct s_core
@@ -93,16 +107,6 @@ typedef struct s_ft
 	int		steps;
 }			t_ft;
 
-typedef struct s_map
-{
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	**f;
-	char	**c;
-	int		flag;
-}			t_map;
 
 void	find_start(t_hero *hero);
 double	cosine(int angle);
@@ -124,6 +128,7 @@ int		list_len(char **lista);
 void	initilize_map(t_map *map);
 void	free_map(t_map *map);
 void	free_list(char **lista);
+char	*dec_to_hex(char *str);
 
 void	ext_map(t_hero *hero);
 void	checker(t_hero *hero, t_map *map);

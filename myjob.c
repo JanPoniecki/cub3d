@@ -3,6 +3,31 @@
 void	put_filars(t_core *main_struct, int *lista, int len);
 void	display_the_win(t_core *main_struct);
 
+long	my_strtol(char *str)
+{
+	long	result = 0;
+	int		shift = 0;
+	int		digit;
+	char	c;
+
+	if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X'))
+		str += 2;
+	while (*str)
+	{
+		c = *str++;
+		if (c >= '0' && c <= '9')
+			digit = c - '0';
+		else if (c >= 'a' && c <= 'f')
+			digit = c - 'a' + 10;
+		else if (c >= 'A' && c <= 'F')
+			digit = c - 'A' + 10;
+		else
+			break;
+		result = result * 16 + digit;
+	}
+	return result;
+}
+
 void	close_window(t_core *mlx)
 {
 	mlx_destroy_image(mlx->con, mlx->img);
@@ -40,41 +65,32 @@ void for_arrows(int	keycode, t_core *mlx)
 
 int	my_key_hook(int keycode, t_core *mlx)
 {
-	// that is Janke's list to display the img
-	// int lista[] = {90, 100, 100, 100, 10, 89, 88, 88, 87, 87, 86, 86, 85, 84, 84, 83, 82, 82, 81, 80, 79, 78, 77, 76, 74, 74,
-	// 	72, 60, 61, 61, 61, 60, 58, 100, 50, 45, 41, 41, 41, 41, 41, 41, 41, 41, 41, 40, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41,
-	// 	45, 49, 53, 57, 59, 32, 15, 17, 69, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 81, 82, 83, 84, 84, 85, 85, 86, 86, 87, 87, 88, 88, 89, 89};
-	// int	len = sizeof(lista) / 4;
-	// function put_filars will do everything
-	// you have to just give the list of the height
-	// and it will display it
-	// example you have only in W ( click w ), of course
-	// it will only work one time
+	int	len;
 
 	if (keycode == 65307)
 		close_window(mlx);
 	else if (keycode == 119)
 	{
 		move_on_y(mlx, 1);
-		int len = sizeof(mlx->hero->vision_2) / 4;
+		len = sizeof(mlx->hero->vision_2) / 4;
 		put_filars(mlx, mlx->hero->vision_2, len);
 	}
 	else if (keycode == 115)
 	{
 		move_on_y(mlx, - 1);
-		int len = sizeof(mlx->hero->vision_2) / 4;
+		len = sizeof(mlx->hero->vision_2) / 4;
 		put_filars(mlx, mlx->hero->vision_2, len);
 	}
 	else if (keycode == 97)
 	{
 		move_on_x(mlx, - 1);
-		int len = sizeof(mlx->hero->vision_2) / 4;
+		len = sizeof(mlx->hero->vision_2) / 4;
 		put_filars(mlx, mlx->hero->vision_2, len);
 	}
 	else if (keycode == 100)
 	{
 		move_on_x(mlx, 1);
-		int len = sizeof(mlx->hero->vision_2) / 4;
+		len = sizeof(mlx->hero->vision_2) / 4;
 		put_filars(mlx, mlx->hero->vision_2, len);
 	}
 	for_arrows(keycode, mlx);
@@ -108,18 +124,35 @@ void	put_one_filar(t_core *main_struct, int i, int hig)
 	int	tmpe = (HEIGHT - tmph) / 2;
 	int	trans = set_color(main_struct, hig, i);
 	j = HEIGHT / 2;
-	while (++ j < tmpe + tmph)
+	// ceiling
+	int	a = -1;
+	while (++a < j)
 	{
 		i = tmp;
 		while (i < 1 + tmp)
-			my_mlx_pixel_put(main_struct, i ++, j, set_color(main_struct, hig, i));
+			my_mlx_pixel_put(main_struct, i ++, a, my_strtol(main_struct->hero->ma->ceiling));
+	}
+	// walls
+	while (++ j < tmpe + tmph)
+	{
+		i = tmp - 1;
+		while (++ i < 1 + tmp)
+			my_mlx_pixel_put(main_struct, i, j, set_color(main_struct, hig, i));
 	}
 	j = HEIGHT / 2 + 1;
 	while (-- j > tmpe)
 	{
+		i = tmp - 1;
+		while (++ i < 1 + tmp)
+			my_mlx_pixel_put(main_struct, i, j, set_color(main_struct, hig, i));
+	}
+	// floor
+	j = tmpe + tmph;
+	while (++ j < HEIGHT)
+	{
 		i = tmp;
 		while (i < 1 + tmp)
-			my_mlx_pixel_put(main_struct, i ++, j, set_color(main_struct, hig, i));
+			my_mlx_pixel_put(main_struct, i ++, j, my_strtol(main_struct->hero->ma->floor));
 	}
 	main_struct->wid += 1;
 }
@@ -171,9 +204,3 @@ void	display_the_win(t_core *main_struct)
 	mlx_loop(main_struct->con);
 	close_window(main_struct);
 }
-
-// int	main(void)
-// {
-// 	create_win();
-// 	return (0);
-// }
