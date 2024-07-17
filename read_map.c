@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 08:46:31 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/16 17:06:52 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:48:10 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,10 @@ void	free_map(t_map *map)
 		free_list(map->f);
 	if (map->c)
 		free_list(map->c);
+	if (map->floor)
+		free(map->floor);
+	if (map->ceiling)
+		free(map->ceiling);
 }
 
 void	write_to_file(int i, char *line, int fd_out)
@@ -168,6 +172,34 @@ void	while_loop(int fd, int fd_out, char **s_line, t_map *map)
 	}
 }
 
+void	change_to_hex(t_map *map)
+{
+	int		i;
+	char	*new_str;
+	char	*tmp1;
+	char	*tmp2;
+
+	i = -1;
+	tmp1 = dec_to_hex(map->c[0]);
+	tmp2 = dec_to_hex(map->c[1]);
+	new_str = ft_strjoin(tmp1, tmp2);
+	free(tmp1);
+	free(tmp2);
+	tmp1 = ft_strjoin(new_str, map->c[2]);
+	map->ceiling = ft_strjoin("0x", tmp1);
+	free(tmp1);
+	free(new_str);
+	tmp1 = dec_to_hex(map->f[0]);
+	tmp2 = dec_to_hex(map->f[1]);
+	new_str = ft_strjoin(tmp1, tmp2);
+	free(tmp1);
+	free(tmp2);
+	tmp1 = ft_strjoin(new_str, map->f[2]);
+	map->floor = ft_strjoin("0x", tmp1);
+	free(tmp1);
+	free(new_str);
+}
+
 void	read_map(t_map *map)
 {
 	int		fd;
@@ -187,6 +219,7 @@ void	read_map(t_map *map)
 		free_map(map);
 		exit(1);
 	}
+	change_to_hex(map);
 }
 
 void	initilize_map(t_map *map)
@@ -197,6 +230,8 @@ void	initilize_map(t_map *map)
 	map->ea = NULL;
 	map->f = NULL;
 	map->c = NULL;
+	map->floor = NULL;
+	map->ceiling = NULL;
 }
 
 // the "main" function is the read_map
@@ -227,7 +262,7 @@ void	initilize_map(t_map *map)
 // 	i = 0;
 // 	while (hero.map[i])
 // 	{
-// 		printf("%s\n", hero.map[i]);
+// 		// printf("%s\n", hero.map[i]);
 // 		free(hero.map[i ++]);
 // 	}
 // 	free(hero.map);

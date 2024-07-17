@@ -14,8 +14,9 @@ int	main(void)
 	calc_axis(&hero, 'y');
 	calc_axis(&hero, 'x');
 	calc_viev(&hero);
+	hero.ma = &map;
 	create_win(&hero);
-
+	
 	free_list(hero.map);
 	free_map(&map);
 
