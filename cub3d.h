@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/17 11:54:13 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/18 19:18:49 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,17 @@ typedef struct s_map
 typedef struct s_hero
 {
 	char	**map;
-	int		y_axis[500][2];
+	int		y_axis[2000][2];
 	int		y_index;
 	int		y_end;
-	int		x_axis[500][2];
+	int		x_axis[2000][2];
 	int		x_index;
 	int		x_end;
 	int		pos[2];
 	int		angle;
 	int		walls[V_RANGE * 2 + 10];
 	int		walls_c[V_RANGE * 2 + 10][2];
-	int		walls_2[V_RANGE * 2 * FILWI];
+	int		walls_2[V_RANGE * 2 * FILWI][3];
 	int		vision_2[V_RANGE * 2 * FILWI];
 	int		vision[V_RANGE * 2 + 10];
 	t_map	*ma;

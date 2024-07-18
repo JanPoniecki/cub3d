@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:17:33 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/17 22:34:36 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/18 19:26:23 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -349,8 +349,6 @@ void	calc_viev(t_hero *hero)
 	int	angle;
 	int	i;
 
-	// printf("%d %d\n", hero->pos[0], hero->pos[1]);
-	// ft_bzero(hero->vision, V_RANGE * 2);
 	angle = hero->angle - V_RANGE;
 	i = 0;
 	while (i != V_RANGE * 2)
@@ -359,7 +357,7 @@ void	calc_viev(t_hero *hero)
 		i ++;
 		angle ++;
 	}
-	handle_corners(hero);
+	// handle_corners(hero);
 	i = 0;
 	int j = 0;
 	int k = 0;
@@ -368,7 +366,9 @@ void	calc_viev(t_hero *hero)
 		while (j < FILWI)
 		{
 			hero->vision_2[k] = hero->vision[i];
-			hero->walls_2[k] = hero->walls[i];
+			hero->walls_2[k][0] = hero->walls[i];
+			hero->walls_2[k][1] = hero->walls_c[i][0];
+			hero->walls_2[k][2] = hero->walls_c[i][1];
 			j ++;
 			k ++;
 		}

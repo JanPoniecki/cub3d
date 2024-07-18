@@ -106,12 +106,14 @@ int		set_color(t_core *main_struct, int hig, int i)
 		trans = 0;
 	else
 		trans = 124 - hig / 20;
-	if (main_struct->hero->walls_2[i] / 10000 == 1)
-		return (int_color(0, 255 - trans, 228 - trans, 124 - trans));
-	if (main_struct->hero->walls_2[i] / 10000 == 2)
-		return (int_color(0, 228 - trans, 200 - trans, 163 - trans));
-	if (main_struct->hero->walls_2[i] / 10000 == 3)
-		return (int_color(0, 228 - trans, 241 - trans, 223 - trans));
+	if (main_struct->hero->walls_2[i][0] / 10000 == 1)
+		return (int_color(0, 160 - trans, 218 - trans, 242 - trans));
+	if (main_struct->hero->walls_2[i][0] / 10000 == 2)
+		return (int_color(0, 242 - trans, 160 - trans, 167 - trans));
+	if (main_struct->hero->walls_2[i][0] / 10000 == 3)
+		return (int_color(0, 207- trans, 242 - trans, 160 - trans));
+	if (main_struct->hero->walls_2[i][0] / 10000 == 4)
+		return (int_color(0, 242- trans, 226 - trans, 160 - trans));
 	else
 		return (int_color(0, 200 - trans, 200 - trans, 200 - trans));
 }
