@@ -30,7 +30,24 @@
 # define DIVIDER 15000
 # define PILLOW 5
 # define MAPF "test_map.cub"
-#define M_FILE "out"
+# define M_FILE "out"
+
+# define H_N 64 //height texture of N
+# define W_N 64 //width texture of N
+# define H_S 64
+# define W_S 64
+# define H_E 64
+# define W_E 64
+# define H_W 64
+# define W_W 64
+
+typedef struct s_textures
+{
+	int		n[H_N][W_N];
+	int		s[H_S][W_E];
+	int		e[H_E][W_E];
+	int		w[H_W][W_W];
+}			t_te;
 
 typedef struct s_axis
 {
@@ -55,8 +72,8 @@ typedef struct s_map
 {
 	char	*no;
 	char	*so;
-	char	*we;
 	char	*ea;
+	char	*we;
 	char	**f;
 	char	**c;
 	char	*floor;
@@ -95,6 +112,7 @@ typedef struct s_core
 	int		line_length;
 	int		wid;
 	t_hero	*hero;
+	t_te	tex;
 }			t_core;
 
 typedef struct s_ft
@@ -133,5 +151,9 @@ char	*dec_to_hex(char *str);
 void	ext_map(t_hero *hero);
 void	checker(t_hero *hero, t_map *map);
 void	read_map(t_map *map);
+void	my_mlx_pixel_put(t_core *data, int x, int y, int color);
+char *dec_to_hex_helper(unsigned int n);
+int	write_texture(t_core *main_str, char *relative_path, int img_width, int (*buffer)[img_width]);
+int	write_textures(t_core *main_str);
 
 #endif
