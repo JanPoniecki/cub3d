@@ -70,33 +70,109 @@ void	refine_part(int start, int stop, t_hero *hero)
 	}
 }
 
+// void	check_left_n(t_hero *hero, int i, int *l, int check)
+// {
+// 	if (i == 0)
+// 		return ;
+// 	if (hero->walls_2[i - 1][0] / 10000 == 1 || hero->walls_2[i - 1][0] / 10000 == 3)
+// 		check = 1;
+// 	if (hero->walls_2[i - 1][0] / 10000 == 2 || hero->walls_2[i - 1][0] / 10000 == 4)
+// 		check = 2;
+// 	if (hero->walls_2[i - 1][check] == hero->walls_2[i][check])
+// 	{
+// 		*l = 1;
+// 	}
+// }
+
 void	check_left_n(t_hero *hero, int i, int *l, int check)
 {
+	int	wall;
+
 	if (i == 0)
 		return ;
-	if (hero->walls_2[i - 1][0] / 10000 == 1 || hero->walls_2[i - 1][0] / 10000 == 3)
-		check = 1;
-	if (hero->walls_2[i - 1][0] / 10000 == 2 || hero->walls_2[i - 1][0] / 10000 == 4)
-		check = 2;
-	if (hero->walls_2[i - 1][check] == hero->walls_2[i][check])
+	wall = 5;
+	if(hero->map[hero->walls_2[i][1]][hero->walls_2[i][2] + 1] == '3')
 	{
+		check = 1;
+		wall = 3;
+	}
+	if(hero->map[hero->walls_2[i][1]][hero->walls_2[i][2] - 1] == '1')
+	{
+		check = 1;
+		wall = 1;
+	}
+	if(hero->map[hero->walls_2[i][1] - 1][hero->walls_2[i][2]] == '2')
+	{
+		check = 2;
+		wall = 2;
+	}
+	if(hero->map[hero->walls_2[i][1] + 1][hero->walls_2[i][2]] == '4')
+	{
+		check = 2;
+		wall = 4;
+	}
+	if (hero->walls_2[i - 1][check] == hero->walls_2[i][check] && hero->walls_2[i - 1][0] / 10000 == wall)
+	{
+		// printf("i wall is %d, wall is %d, i - 1 is %d\n ", hero->walls_2[i][0], wall, hero->walls_2[i - 1][0]);
 		*l = 1;
 	}
 }
 
 void	check_right_n(t_hero *hero, int i, int *r, int check)
 {
-	while (hero->walls_2[i][0] / 10000 == 9 && i < V_RANGE * 2 * FILWI)
+	int	wall;
+	int	corner;
+
+	wall = 5;
+	corner = hero->walls_2[i][0];
+	while (hero->walls_2[i][0] == corner && i < V_RANGE * 2 * FILWI)
 		i ++;
-	if (hero->walls_2[i][0] / 10000 == 1 || hero->walls_2[i][0] / 10000 == 3)
-		check = 1;
-	if (hero->walls_2[i][0] / 10000 == 2 || hero->walls_2[i][0] / 10000 == 4)
-		check = 2;
-	if (hero->walls_2[i][check] == hero->walls_2[i - 1][check])
+	i --;
+	if(hero->map[hero->walls_2[i][1]][hero->walls_2[i][2] + 1] == '1')
 	{
+		check = 1;
+		wall = 1;
+	}
+	if(hero->map[hero->walls_2[i][1]][hero->walls_2[i][2] - 1] == '3')
+	{
+		check = 1;
+		wall = 3;
+	}
+	if(hero->map[hero->walls_2[i][1] - 1][hero->walls_2[i][2]] == '4')
+	{
+		check = 2;
+		wall = 4;
+	}
+	if(hero->map[hero->walls_2[i][1] + 1][hero->walls_2[i][2]] == '2')
+	{
+		check = 2;
+		wall = 2;
+	}
+	if (hero->walls_2[i + 1][check] == hero->walls_2[i][check] && hero->walls_2[i + 1][0] / 10000 == wall)
+	{
+		// printf("i wall is %d, wall is %d, i + 1 is %d\n ", hero->walls_2[i][0], wall, hero->walls_2[i + 1][0]);
 		*r = 1;
 	}
 }
+
+// void	check_right_n(t_hero *hero, int i, int *r, int check)
+// {
+// 	while (hero->walls_2[i][0] / 10000 == 9 && i < V_RANGE * 2 * FILWI)
+// 		i ++;
+// 	i --;
+// 	if(hero->map[hero->walls_2[i][1]][hero->walls_2[i][2] - 1] == '3')
+// 		check = 1;
+// 	if(hero->map[hero->walls_2[i][1]][hero->walls_2[i][2] + 1] == '1')
+// 		check = 1;
+// 	if(hero->map[hero->walls_2[i + 1][1]][hero->walls_2[i][2]] == '2')
+// 		check = 2;
+// 	if(hero->map[hero->walls_2[i - 1][1]][hero->walls_2[i][2]] == '4')
+// 		check = 2;
+// 	if (hero->walls_2[i][check] == hero->walls_2[i - 1][check])
+// 	{
+// 		*r = 1;
+// 	}
+// }
 
 void	overwrite_left(t_hero *hero, int i, int n)
 {
@@ -150,9 +226,11 @@ void	overwrite_both(t_hero *hero, int i, int n)
 void	overwrite_corner(t_hero *hero, int i, int l, int r)
 {
 	int	n;
+	int	corner;
 
 	n = 0;
-	while (hero->walls_2[i][0] / 10000 == 9 && i > 0)
+	corner = hero->walls_2[i][0];
+	while (hero->walls_2[i][0] == corner && i > 0)
 	{
 		i++;
 		n++;
@@ -161,21 +239,31 @@ void	overwrite_corner(t_hero *hero, int i, int l, int r)
 		overwrite_left(hero, i, n);
 	if (l == 0 && r == 1)
 		overwrite_right(hero, i, n);
-	// if (l == 1 && r == 1)
-		// overwrite_both(hero, i, n);
+	if (l == 1 && r == 1)
+		overwrite_both(hero, i, n);
 }
 
-void	fix_corners(t_hero *hero, int i, int l, int r)
+void	fix_corners(t_hero *hero, int i)
 {
+	int	l;
+	int	r;
+	int	corner;
+
 	while (i < V_RANGE * 2 * FILWI)
 	{
+		l = 0;
+		r = 0;
 		if (hero->walls_2[i][0] / 10000 == 9)
 		{
+			corner = hero->walls_2[i][0];
 			check_left_n(hero, i, &l, 0);
 			check_right_n(hero, i, &r, 0);
 			overwrite_corner(hero, i, l, r);
-			while (hero->walls_2[i][0] / 10000 == 9)
+			while (hero->walls_2[i][0] == corner)
 				i++;
+			// printf("%d %d %d %d %d", hero->walls_2[i - 3][0], hero->walls_2[i - 2][0],
+			 // hero->walls_2[i - 1][0], hero->walls_2[i][0], hero->walls_2[i + 1][0]);
+			// printf("\n--------\n");
 		}
 		i ++;
 	}
@@ -191,7 +279,7 @@ void	fine_tune_view(t_hero *hero)
 	i = 1;
 	j = 0;
 	n = 0;
-	fix_corners(hero, 0, 0, 0);
+	fix_corners(hero, 0);
 	last = hero->walls_2[0][0];
 	while (i < V_RANGE * 2 * FILWI)
 	{
@@ -203,6 +291,5 @@ void	fine_tune_view(t_hero *hero)
 		n ++;
 		i ++;
 	}
-	printf("\n");
-	// exit (0);
+	// printf("\n");
 }

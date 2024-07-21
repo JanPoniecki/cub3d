@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ext_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:55:11 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/17 14:41:29 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:39:40 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,40 @@ void	change_the_map(t_hero *hero, int i, int j)
 	}
 }
 
+char	check_the_corner(t_hero *hero, int i, int j)
+{
+	int	ones;
+
+	ones = 0;
+	if (hero->map[i - 1][j] == '1')
+		ones ++;
+	if (hero->map[i + 1][j] == '1')
+		ones ++;
+	if (hero->map[i][j - 1] == '1')
+		ones ++;
+	if (hero->map[i][j + 1] == '1')
+		ones ++;
+	if (ones > 1)
+		return ('8');
+	else
+		return ('9');
+}
+
+
+void	find_inner_corners(t_hero *hero, int i, int j)
+{
+	while (hero->map[i])
+	{
+		j = 0;
+		while (hero->map[i][j])
+		{
+			if (hero->map[i][j] == '9')
+				hero->map[i][j] = check_the_corner(hero, i, j);
+			j ++;
+		}
+		i ++;
+	}
+}
 
 void	ext_map(t_hero *hero)
 {
@@ -145,6 +179,7 @@ void	ext_map(t_hero *hero)
 	}
 	close(fd);
 	change_the_map(hero, 0, 0);
+	// find_inner_corners(hero, 0, 0);
 }
 
 // glowna funkcja to ext_map
