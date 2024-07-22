@@ -29,6 +29,7 @@ int	write_texture(t_core *main_str, char *relative_path, int img_width, int **bu
 			// printf("x = %d, y = %d, %d\n", x, y, main_str->tex.n[y][x]);
 		}
 	}
+	mlx_destroy_image(main_str->con, texture);
 	return (0);
 }
 

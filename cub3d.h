@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/22 12:13:15 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:57:33 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	calc_axis(t_hero *hero, char type);
 void	print_map(t_hero *hero);
 void	calc_viev(t_hero *hero);
 void	ext_map(t_hero *hero);
-void	create_win(t_hero *hero);
+void	create_win(t_core *main_struct);
 void	move_on_y(t_core *main_struct, int change);
 void	move_on_x(t_core *main_struct, int change);
 void	rotate(t_core *main_struct, int change);
@@ -148,10 +148,11 @@ void	ext_map(t_hero *hero);
 void	checker(t_hero *hero, t_map *map);
 void	read_map(t_map *map);
 void	my_mlx_pixel_put(t_core *data, int x, int y, int color);
-char *dec_to_hex_helper(unsigned int n);
-int	write_texture(t_core *main_str, char *relative_path, int img_width, int **buffer);
-int	write_textures(t_core *main_str);
+char	*dec_to_hex_helper(unsigned int n);
+int		write_texture(t_core *main_str, char *relative_path, int img_width, int **buffer);
+int		write_textures(t_core *main_str);
 void	expand_the_texture(t_core *main_str, int **texture);
 void	reduce_the_texture(t_core *main_str, int **texture);
+void	free_list_int(int **lista, int size);
 
 #endif
