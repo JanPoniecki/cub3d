@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/18 19:18:49 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:30:39 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ char	*dec_to_hex(char *str);
 void	ext_map(t_hero *hero);
 void	checker(t_hero *hero, t_map *map);
 void	read_map(t_map *map);
+void	delete_n(t_hero *hero, int i, int j, int sum);
 
 #endif

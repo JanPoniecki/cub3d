@@ -9,6 +9,7 @@ int	main(void)
 	read_map(&map);
 	ext_map(&hero);
 	checker(&hero, &map);
+	delete_n(&hero, -1, 0, 0);
 
 	find_start(&hero);
 	calc_axis(&hero, 'y');
