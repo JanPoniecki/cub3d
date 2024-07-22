@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/17 11:54:13 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:13:15 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,17 @@
 # define MAPF "test_map.cub"
 # define M_FILE "out"
 
-# define H_N 64 //height texture of N
-# define W_N 64 //width texture of N
-# define H_S 64
-# define W_S 64
-# define H_E 64
-# define W_E 64
-# define H_W 64
-# define W_W 64
+# define SIZE_N 64
+# define SIZE_E 64
+# define SIZE_S 64
+# define SIZE_W 64
 
 typedef struct s_textures
 {
-	int		n[H_N][W_N];
-	int		s[H_S][W_E];
-	int		e[H_E][W_E];
-	int		w[H_W][W_W];
+	int		**n;
+	int		**s;
+	int		**e;
+	int		**w;
 }			t_te;
 
 typedef struct s_axis
@@ -153,7 +149,9 @@ void	checker(t_hero *hero, t_map *map);
 void	read_map(t_map *map);
 void	my_mlx_pixel_put(t_core *data, int x, int y, int color);
 char *dec_to_hex_helper(unsigned int n);
-int	write_texture(t_core *main_str, char *relative_path, int img_width, int (*buffer)[img_width]);
+int	write_texture(t_core *main_str, char *relative_path, int img_width, int **buffer);
 int	write_textures(t_core *main_str);
+void	expand_the_texture(t_core *main_str, int **texture);
+void	reduce_the_texture(t_core *main_str, int **texture);
 
 #endif
