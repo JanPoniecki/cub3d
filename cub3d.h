@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/22 14:30:39 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/23 12:32:57 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,20 @@
 # define DIVIDER 15000
 # define PILLOW 5
 # define MAPF "test_map.cub"
-#define M_FILE "out"
+# define M_FILE "out"
+
+# define SIZE_N 64
+# define SIZE_E 64
+# define SIZE_S 64
+# define SIZE_W 64
+
+typedef struct s_textures
+{
+	int		**n;
+	int		**s;
+	int		**e;
+	int		**w;
+}			t_te;
 
 typedef struct s_axis
 {
@@ -55,8 +68,8 @@ typedef struct s_map
 {
 	char	*no;
 	char	*so;
-	char	*we;
 	char	*ea;
+	char	*we;
 	char	**f;
 	char	**c;
 	char	*floor;
@@ -94,6 +107,7 @@ typedef struct s_core
 	int		line_length;
 	int		wid;
 	t_hero	*hero;
+	t_te	tex;
 }			t_core;
 
 typedef struct s_ft
@@ -113,7 +127,7 @@ void	calc_axis(t_hero *hero, char type);
 void	print_map(t_hero *hero);
 void	calc_viev(t_hero *hero);
 void	ext_map(t_hero *hero);
-void	create_win(t_hero *hero);
+void	create_win(t_core *main_struct);
 void	move_on_y(t_core *main_struct, int change);
 void	move_on_x(t_core *main_struct, int change);
 void	rotate(t_core *main_struct, int change);
@@ -132,6 +146,13 @@ char	*dec_to_hex(char *str);
 void	ext_map(t_hero *hero);
 void	checker(t_hero *hero, t_map *map);
 void	read_map(t_map *map);
+void	my_mlx_pixel_put(t_core *data, int x, int y, int color);
+char	*dec_to_hex_helper(unsigned int n);
+int		write_texture(t_core *main_str, char *relative_path, int img_width, int **buffer);
+int		write_textures(t_core *main_str);
+void	expand_the_texture(t_core *main_str, int **texture);
+void	reduce_the_texture(t_core *main_str, int **texture);
+void	free_list_int(int **lista, int size);
 void	delete_n(t_hero *hero, int i, int j, int sum);
 
 #endif

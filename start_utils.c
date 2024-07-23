@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:42:47 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/14 20:46:57 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:15:43 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,71 @@ void	find_start(t_hero *hero)
 		}
 		crd[1] = 0;
 		crd[0] ++;
+	}
+}
+
+// powiekszanie
+void	expand_the_texture(t_core *main_str, int **texture)
+{
+	int z = 0;
+	int i = 0;
+	int	tmp;
+	tmp = i;
+	int j;
+	int x = 0;
+	int y = 0;
+	while (i < 128)
+	{
+		z = 0;
+		while (z < 2)
+		{
+			x = 0;
+			j = 63;
+			y = tmp % 64;
+			while (++ j < 128)
+			{
+				my_mlx_pixel_put(main_str, j, i, texture[y][x]);
+				x ++;
+			}
+			x = 0;
+			j = 127;
+			y = tmp % 64;
+			while (++ j < 192)
+			{
+				my_mlx_pixel_put(main_str, j, i, texture[y][x]);
+				x ++;
+			}
+			i ++;
+			z ++;
+		}
+		tmp ++;
+		y ++;
+	}
+}
+
+void	reduce_the_texture(t_core *main_str, int **texture)
+{
+	int	z;
+	int	i;
+	int	tmp;
+	int	j;
+	int	y;
+	int	x;
+
+	z = 0;
+	i = 0;
+	tmp = i;
+	while (i < 64)
+	{
+		j = 63;
+		y = tmp % 64;
+		x = 0;
+		while (++ j < 128)
+		{
+			my_mlx_pixel_put(main_str, j, i, texture[y][x]);
+			x ++;
+		}
+		i ++;
+		tmp += 2;
 	}
 }

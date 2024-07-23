@@ -36,6 +36,11 @@ void	close_window(t_core *mlx)
 	free(mlx->con);
 	free_list(mlx->hero->map);
 	free_map(mlx->hero->ma);
+	free(mlx->hero);
+	free_list_int(mlx->tex.n, SIZE_N);
+	free_list_int(mlx->tex.e, SIZE_E);
+	free_list_int(mlx->tex.s, SIZE_S);
+	free_list_int(mlx->tex.w, SIZE_W);
 	exit (0);
 }
 
@@ -175,18 +180,16 @@ void	put_filars(t_core *main_struct, int *lista, int len)
 	main_struct->wid = 0;
 }
 
-void	create_win(t_hero *hero)
+void	create_win(t_core *main_struct)
 {
-	t_core	main_struct;
-
-	main_struct.hero = hero;
-	main_struct.wid = 0;
-	main_struct.con = mlx_init();
-	main_struct.win = mlx_new_window(main_struct.con, WIDTH, HEIGHT, "cub3d");
-	main_struct.img = mlx_new_image(main_struct.con, WIDTH, HEIGHT);
-	main_struct.addr = mlx_get_data_addr(main_struct.img, &main_struct.bits_per_pixel,
-			&main_struct.line_length, &main_struct.endian);
-	display_the_win(&main_struct);
+	main_struct->wid = 0;
+	main_struct->con = mlx_init();
+	write_textures(main_struct);
+	main_struct->win = mlx_new_window(main_struct->con, WIDTH, HEIGHT, "cub3d");
+	main_struct->img = mlx_new_image(main_struct->con, WIDTH, HEIGHT);
+	main_struct->addr = mlx_get_data_addr(main_struct->img, &main_struct->bits_per_pixel,
+			&main_struct->line_length, &main_struct->endian);
+	display_the_win(main_struct);
 }
 
 
@@ -199,6 +202,7 @@ void	display_the_win(t_core *main_struct)
 	int	len = sizeof(main_struct->hero->vision_2) / 4;
 
 	// first put a image to window
+	// write_textures(main_struct);
 	put_filars(main_struct, main_struct->hero->vision_2, len);
 	// the hooks
 	// mlx_do_key_autorepeaton(main_struct->con);

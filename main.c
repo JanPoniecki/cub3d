@@ -1,25 +1,29 @@
 #include "cub3d.h"
+#include <string.h>
 
 int	main(void)
 {
-	t_map	map;
-	t_hero	hero;
+	t_core	main_str;
 
-	initilize_map(&map);
-	read_map(&map);
-	ext_map(&hero);
-	checker(&hero, &map);
-	delete_n(&hero, -1, 0, 0);
+	main_str.hero = malloc(sizeof(t_hero));
+	ft_memset(main_str.hero, 0, sizeof(t_hero));
+	main_str.hero->ma = malloc(sizeof(t_map));
+	ft_memset(main_str.hero->ma, 0, sizeof(t_map));
 
-	find_start(&hero);
-	calc_axis(&hero, 'y');
-	calc_axis(&hero, 'x');
-	calc_viev(&hero);
-	hero.ma = &map;
-	create_win(&hero);
+	initilize_map(main_str.hero->ma);
+	read_map(main_str.hero->ma);
+	ext_map(main_str.hero);
+	checker(main_str.hero, main_str.hero->ma);
+	delete_n(main_str.hero, -1, 0, 0);
+
+	find_start(main_str.hero);
+	calc_axis(main_str.hero, 'y');
+	calc_axis(main_str.hero, 'x');
+	calc_viev(main_str.hero);
+	create_win(&main_str);
 	
-	free_list(hero.map);
-	free_map(&map);
-
-	printf("The map is ok, the program finished!");
+	free_list(main_str.hero->map);
+	free_map(main_str.hero->ma);
+	free(main_str.hero);
+	free(main_str.hero->ma);
 }

@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 08:46:31 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/17 11:48:10 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:55:53 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@ void	free_list(char **lista)
 
 	i = 0;
 	while (lista[i])
+		free(lista[i ++]);
+	free(lista);
+	lista = NULL;
+}
+
+void	free_list_int(int **lista, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
 		free(lista[i ++]);
 	free(lista);
 	lista = NULL;
@@ -133,6 +144,7 @@ void	free_map(t_map *map)
 		free(map->floor);
 	if (map->ceiling)
 		free(map->ceiling);
+	free(map);
 }
 
 void	write_to_file(int i, char *line, int fd_out)
