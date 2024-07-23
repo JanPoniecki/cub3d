@@ -174,7 +174,10 @@ void	put_filars(t_core *main_struct, int *lista, int len)
 	main_struct->addr = mlx_get_data_addr(main_struct->img, &main_struct->bits_per_pixel,
 			&main_struct->line_length, &main_struct->endian);
 	while (++i < len)
+	{
 		put_one_filar(main_struct, main_struct->wid, lista[i]);
+		printf("%d %d %d\n", main_struct->hero->walls_2[i][0],  main_struct->hero->walls_2[i][1], main_struct->hero->walls_2[i][2]);
+	}
 	mlx_put_image_to_window(main_struct->con, main_struct->win,
 		main_struct->img, 0, 0);
 	main_struct->wid = 0;
