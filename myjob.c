@@ -104,66 +104,94 @@ int	my_key_hook(int keycode, t_core *mlx)
 	return (0);
 }
 
-int		set_color(t_core *main_struct, int hig, int i)
+int		set_color(t_core *main_struct, int hig, int n, int col, int wall)
 {
-	int	trans;
-	if (hig > 2000)
-		trans = 0;
-	else
-		trans = 124 - hig / 1;
-	if (trans < 0)
-		trans = 0;
-	if (main_struct->hero->walls_2[i][0] / 10000 == 1)
-		return (int_color(0, 160 - trans, 218 - trans, 242 - trans));
-	if (main_struct->hero->walls_2[i][0] / 10000 == 2)
-		return (int_color(0, 242 - trans, 160 - trans, 167 - trans));
-	if (main_struct->hero->walls_2[i][0] / 10000 == 3)
-		return (int_color(0, 207- trans, 242 - trans, 160 - trans));
-	if (main_struct->hero->walls_2[i][0] / 10000 == 4)
-		return (int_color(0, 242- trans, 226 - trans, 160 - trans));
-	else
-		return (int_color(0, 200 - trans, 200 - trans, 200 - trans));
+	int	c = interpolation(hig, SIZE_N - 1, n);
+	int	darkener = hig / 5;
+	if (darkener > 125)
+		darkener = 125;
+	darkener = 125 - darkener;
+	// static int y;
+
+	// if (hig == -1)
+		// y = 0;
+	int color;
+	if (wall == 1)
+		color = main_struct->tex.n[c][col];
+	if (wall == 2)
+		color = main_struct->tex.e[c][col];
+	if (wall == 3)
+		color = main_struct->tex.s[c][col];
+	if (wall == 4)
+		color = main_struct->tex.w[c][col];
+	if (darkener > 5)
+		color = darken_color(color, darkener);
+	// y ++;
+	// if (y >= SIZE_N)
+		// y = 0;
+	return (color);
+	// int	trans;
+	// if (hig > 2000)
+	// 	trans = 0;
+	// else
+	// 	trans = 124 - hig / 1;
+	// if (trans < 0)
+	// 	trans = 0;
+	// if (main_struct->hero->walls_2[i][0] / 10000 == 1)
+	// 	return (int_color(0, 160 - trans, 218 - trans, 242 - trans));
+	// if (main_struct->hero->walls_2[i][0] / 10000 == 2)
+	// 	return (int_color(0, 242 - trans, 160 - trans, 167 - trans));
+	// if (main_struct->hero->walls_2[i][0] / 10000 == 3)
+	// 	return (int_color(0, 207- trans, 242 - trans, 160 - trans));
+	// if (main_struct->hero->walls_2[i][0] / 10000 == 4)
+	// 	return (int_color(0, 242- trans, 226 - trans, 160 - trans));
+	// else
+	// 	return (int_color(0, 200 - trans, 200 - trans, 200 - trans));
 }
 
-void	put_one_filar(t_core *main_struct, int i, int hig)
+void	put_one_filar(t_core *main_struct, int i, int hig, int col)
 {
 	int	j = -1;
+	int wall = main_struct->hero->walls_2[i][0] / 10000;
 	int	tmp = i;
+	int	real_hig = hig;
 	if (hig > HEIGHT)
 		hig = HEIGHT;
 	int	tmph = hig;
 	int	tmpe = (HEIGHT - tmph) / 2;
-	int	trans = set_color(main_struct, hig, i);
+	// int	trans = set_color(main_struct, hig, i);
 	j = HEIGHT / 2;
 	// ceiling
-	int	a = -1;
-	while (++a < j)
-	{
-		i = tmp;
-		while (i < 1 + tmp)
-			my_mlx_pixel_put(main_struct, i ++, a, my_strtol(main_struct->hero->ma->ceiling));
-	}
+	// int	a = -1;
+	// while (++a < j)
+	// {
+	// 	i = tmp;
+	// 	while (i < 1 + tmp)
+	// 		my_mlx_pixel_put(main_struct, i ++, a, my_strtol(main_struct->hero->ma->ceiling));
+	// }
 
 	// walls
+	// set_color(main_struct, -1, 0, 0);
 	j = tmpe;
+	int n = (real_hig - hig) / 2;
 	while (++ j < tmpe + tmph)
 	{
 		i = tmp - 1;
 		while (++ i < 1 + tmp)
 		{
-			// printf("%d ", (interpolation(tmph, 64, i) - 1) % 64);
-			my_mlx_pixel_put(main_struct, i, j, main_struct->tex.e[(interpolation(tmph, 64,j) - 1) % 64][(interpolation(tmph, 64, i) - 1) % 64]);
+			my_mlx_pixel_put(main_struct, i, j, set_color(main_struct, real_hig, n, col % 64, wall));
+			n ++;
 		}
 	}
 
 	// floor
-	j = tmpe + tmph;
-	while (++ j < HEIGHT)
-	{
-		i = tmp;
-		while (i < 1 + tmp)
-			my_mlx_pixel_put(main_struct, i ++, j, my_strtol(main_struct->hero->ma->floor));
-	}
+	// j = tmpe + tmph;
+	// while (++ j < HEIGHT)
+	// {
+	// 	i = tmp;
+	// 	while (i < 1 + tmp)
+	// 		my_mlx_pixel_put(main_struct, i ++, j, my_strtol(main_struct->hero->ma->floor));
+	// }
 	main_struct->wid += 1;
 }
 
@@ -176,7 +204,7 @@ void	put_filars(t_core *main_struct, int *lista, int len)
 			&main_struct->line_length, &main_struct->endian);
 	while (++i < len)
 	{
-		put_one_filar(main_struct, main_struct->wid, lista[i]);
+		put_one_filar(main_struct, main_struct->wid, lista[i], i);
 		// printf("%d %d %d\n", main_struct->hero->walls_2[i][0],  main_struct->hero->walls_2[i][1], main_struct->hero->walls_2[i][2]);
 	}
 	mlx_put_image_to_window(main_struct->con, main_struct->win,

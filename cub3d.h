@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/23 15:05:37 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/23 21:49:50 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	fine_tune_view(t_hero *hero);
 int		ft_abs(int num);
 int		int_color(unsigned char t, unsigned char r, \
 	unsigned char g, unsigned char b);
+int		darken_color(int color, int darkener);
 
 int		len_of_file(char *file);
 int		list_len(char **lista);
