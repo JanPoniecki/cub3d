@@ -150,7 +150,10 @@ void	put_one_filar(t_core *main_struct, int i, int hig)
 	{
 		i = tmp - 1;
 		while (++ i < 1 + tmp)
-			my_mlx_pixel_put(main_struct, i, j, main_struct->tex.e[j % 64][i % 64]);
+		{
+			// printf("%d ", (interpolation(tmph, 64, i) - 1) % 64);
+			my_mlx_pixel_put(main_struct, i, j, main_struct->tex.e[(interpolation(tmph, 64,j) - 1) % 64][(interpolation(tmph, 64, i) - 1) % 64]);
+		}
 	}
 
 	// floor
