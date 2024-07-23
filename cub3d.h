@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/23 12:32:57 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:05:37 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,6 @@ void	expand_the_texture(t_core *main_str, int **texture);
 void	reduce_the_texture(t_core *main_str, int **texture);
 void	free_list_int(int **lista, int size);
 void	delete_n(t_hero *hero, int i, int j, int sum);
+int	interpolation(int height, int txt_height, int point);
 
 #endif
