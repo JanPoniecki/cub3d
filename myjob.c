@@ -103,50 +103,30 @@ int	my_key_hook(int keycode, t_core *mlx)
 	for_arrows(keycode, mlx);
 	return (0);
 }
-
-int		set_color(t_core *main_struct, int hig, int n, int col, int wall)
+int set_color(t_core *main_struct, int hig, int n, int col, int wall)
 {
-	int	c = interpolation(hig, SIZE_N - 1, n);
-	int	darkener = hig / 5;
+	int c, e, darkener, color;
+
+	c = interpolation(hig, SIZE_N - 1, n);
+	e = interpolation(hig, SIZE_N - 1, col);
+	if (wall == 1)
+		color = main_struct->tex.n[c][e % SIZE_N];
+	else if (wall == 2)
+		color = main_struct->tex.e[c][e % SIZE_E];
+	else if (wall == 3)
+		color = main_struct->tex.s[c][e % SIZE_S];
+	else if (wall == 4)
+		color = main_struct->tex.w[c][e % SIZE_W];
+	darkener = hig / 5;
+	
 	if (darkener > 125)
 		darkener = 125;
 	darkener = 125 - darkener;
-	// static int y;
 
-	// if (hig == -1)
-		// y = 0;
-	int color;
-	if (wall == 1)
-		color = main_struct->tex.n[c][col];
-	if (wall == 2)
-		color = main_struct->tex.e[c][col];
-	if (wall == 3)
-		color = main_struct->tex.s[c][col];
-	if (wall == 4)
-		color = main_struct->tex.w[c][col];
 	if (darkener > 5)
 		color = darken_color(color, darkener);
-	// y ++;
-	// if (y >= SIZE_N)
-		// y = 0;
-	return (color);
-	// int	trans;
-	// if (hig > 2000)
-	// 	trans = 0;
-	// else
-	// 	trans = 124 - hig / 1;
-	// if (trans < 0)
-	// 	trans = 0;
-	// if (main_struct->hero->walls_2[i][0] / 10000 == 1)
-	// 	return (int_color(0, 160 - trans, 218 - trans, 242 - trans));
-	// if (main_struct->hero->walls_2[i][0] / 10000 == 2)
-	// 	return (int_color(0, 242 - trans, 160 - trans, 167 - trans));
-	// if (main_struct->hero->walls_2[i][0] / 10000 == 3)
-	// 	return (int_color(0, 207- trans, 242 - trans, 160 - trans));
-	// if (main_struct->hero->walls_2[i][0] / 10000 == 4)
-	// 	return (int_color(0, 242- trans, 226 - trans, 160 - trans));
-	// else
-	// 	return (int_color(0, 200 - trans, 200 - trans, 200 - trans));
+
+	return color;
 }
 
 void	put_one_filar(t_core *main_struct, int i, int hig, int col)
@@ -179,7 +159,7 @@ void	put_one_filar(t_core *main_struct, int i, int hig, int col)
 		i = tmp - 1;
 		while (++ i < 1 + tmp)
 		{
-			my_mlx_pixel_put(main_struct, i, j, set_color(main_struct, real_hig, n, col % 64, wall));
+			my_mlx_pixel_put(main_struct, i, j, set_color(main_struct, real_hig, n, col, wall));
 			n ++;
 		}
 	}
@@ -204,8 +184,9 @@ void	put_filars(t_core *main_struct, int *lista, int len)
 			&main_struct->line_length, &main_struct->endian);
 	while (++i < len)
 	{
+		if (i % 20 == 0)
+			printf("%d %d %d %d\n", main_struct->hero->walls_2[i][0] / 10000,  main_struct->hero->walls_2[i][1], main_struct->hero->walls_2[i][2], i);
 		put_one_filar(main_struct, main_struct->wid, lista[i], i);
-		// printf("%d %d %d\n", main_struct->hero->walls_2[i][0],  main_struct->hero->walls_2[i][1], main_struct->hero->walls_2[i][2]);
 	}
 	mlx_put_image_to_window(main_struct->con, main_struct->win,
 		main_struct->img, 0, 0);
