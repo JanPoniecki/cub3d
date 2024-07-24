@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/23 21:49:50 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/24 11:50:10 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 
 # define HEIGHT 1080
 # define WIDTH 2000
-# define V_RANGE 45
+# define V_RANGE 50
 # define FILAR_SIZE 20
 # define FILWI 20
-# define DIVIDER 15000
+# define DIVIDER 20000
 # define PILLOW 5
 # define MAPF "test_map.cub"
 # define M_FILE "out"
