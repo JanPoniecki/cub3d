@@ -140,15 +140,10 @@ void	put_one_filar(t_core *main_struct, int i, int hig, int *col)
 		check = 2;
 	else
 		check = 1;
-	if (main_struct->hero->walls_2[i][check] %  POW == 0)
-	{
-		if (i != 0 && (main_struct->hero->walls_2[i - 1][check] != main_struct->hero->walls_2[i][check] || 
-			main_struct->hero->walls_2[i - 1][0] != main_struct->hero->walls_2[i][0]))
-			*col = 0;
-	}
-	else if (i != 0 && main_struct->hero->walls_2[i - 1][0] == main_struct->hero->walls_2[i][0] &&
-		main_struct->hero->walls_2[i - 1][check] % POW > main_struct->hero->walls_2[i][check] % POW)
-			*col = 0;
+	if (i != 0 && main_struct->hero->walls_2[i - 1][0] != main_struct->hero->walls_2[i][0])
+		*col = 0;
+	else if (i != 0 && main_struct->hero->walls_2[i - 1][check] % POW > main_struct->hero->walls_2[i][check] % POW)
+		*col = 0;
 	int	tmp = i;
 	int	real_hig = hig;
 	if (hig > HEIGHT)
