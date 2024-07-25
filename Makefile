@@ -1,5 +1,5 @@
 # FLAGS = -Wall -Wextra -Werror -g
-FLAGS = -g -no-pie
+FLAGS = -g 
 NAME = cub3d
 LIB = ./mylibft/mylibft.a
 OBJDIR = Obj/
