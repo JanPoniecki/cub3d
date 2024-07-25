@@ -107,12 +107,14 @@ int set_color(t_core *main_struct, int hig, int n, int col, int wall, int hig1, 
 {
 	int c, e, darkener, color;
 	if (t > 1)
-		printf("%d %d, ", t, hig1);
+		// printf("%d %d ", t, hig1);
 
 	if (col == 0)
 		return (int_color(0, 255, 0, 0));
 	c = interpolation(hig, SIZE_N - 1, n);
 	e = interpolation(hig1, SIZE_N - t, col);
+	if (t > 1)
+		printf("%d ;", e);
 	if (wall == 1)
 		color = main_struct->tex.n[c][e % SIZE_N];
 	else if (wall == 2)
