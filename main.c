@@ -11,7 +11,7 @@ int	main(void)
 	ft_memset(main_str.hero->ma, 0, sizeof(t_map));
 
 	initilize_map(main_str.hero->ma);
-	read_map(main_str.hero->ma);
+	read_map(main_str.hero, main_str.hero->ma);
 	ext_map(main_str.hero);
 	checker(main_str.hero, main_str.hero->ma);
 	delete_n(main_str.hero, -1, 0, 0);

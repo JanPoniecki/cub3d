@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 08:46:31 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/23 19:38:57 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/29 13:29:10 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,10 @@ void	free_map(t_map *map)
 	free(map);
 }
 
-void	write_to_file(int i, char *line, int fd_out)
+void	write_to_file(int i, char *line, int fd_out, t_map *map)
 {
+	if (line[0] == '\n')
+		map->flag = 1;
 	while (line[++ i])
 	{
 		if (line[i] == ' ')
@@ -170,7 +172,7 @@ void	while_loop(int fd, int fd_out, char **s_line, t_map *map)
 		if (line[0] == ' ' || line[0] == '1' || line[0] == '0')
 			fl = 1;
 		if (fl == 1)
-			write_to_file(-1, line, fd_out);
+			write_to_file(-1, line, fd_out, map);
 		else if (line[0] != '\n')
 		{
 			line[ft_strlen(line) - 1] = '\0';
@@ -212,7 +214,7 @@ void	change_to_hex(t_map *map)
 	free(new_str);
 }
 
-void	read_map(t_map *map)
+void	read_map(t_hero *hero, t_map *map)
 {
 	int		fd;
 	char	**s_line;
@@ -229,6 +231,7 @@ void	read_map(t_map *map)
 		errno = EINVAL;
 		perror("Error\n");
 		free_map(map);
+		free(hero);
 		exit(1);
 	}
 	change_to_hex(map);
