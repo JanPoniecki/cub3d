@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/24 22:08:18 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/29 10:04:16 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <errno.h>
 
 # define HEIGHT 1080
-# define WIDTH 2000
-# define V_RANGE 50
+# define WIDTH 1980
+# define V_RANGE 49
 # define FILAR_SIZE 20
 # define FILWI 20
 # define DIVIDER 20000

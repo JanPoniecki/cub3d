@@ -70,6 +70,40 @@ void for_arrows(int	keycode, t_core *mlx)
 	}
 }
 
+int	num_of_col(t_core *main_struct, int wall, int i, int len)
+{
+	// printf("wall = %d\n", wall);
+	int	check;
+	int	num;
+
+	num = 0;
+	if (wall == 1 || wall == 3)
+		check = 2;
+	else
+		check = 1;
+	// printf("i = %d", i );
+	while (1)
+	{
+		if (i != 0 && ((wall == 1 || wall == 2) && (main_struct->hero->walls_2[i - 1][0] != main_struct->hero->walls_2[i][0]
+				|| main_struct->hero->walls_2[i - 1][check] % POW > main_struct->hero->walls_2[i][check] % POW)))
+			break ;
+		else if (i != 0 && ((wall == 3 || wall == 4) && (main_struct->hero->walls_2[i - 1][0] != main_struct->hero->walls_2[i][0]
+				|| main_struct->hero->walls_2[i - 1][check] % POW < main_struct->hero->walls_2[i][check] % POW)))
+			break ;
+		if (wall == 9)
+			break;
+		i ++;
+		num ++;
+		if (i >= len)
+		{
+			num = -num;
+			break ;
+		}
+	}
+	// printf("nu = %d %d\n", i, num);
+	return (num);
+}
+
 int	my_key_hook(int keycode, t_core *mlx)
 {
 	int	len;
@@ -116,7 +150,8 @@ int set_color(t_core *main_struct, int hig, int n, int col, int wall, int hig1, 
 		e = interpolation(ft_abs(hig1), SIZE_N - x, col);
 	else
 	{
-		e = interpolation(ft_abs(hig1), x, col);
+		// printf("x = %d\n", x);
+		e = interpolation(ft_abs(hig1), SIZE_N - ft_abs(ft_abs(hig1) / POW * 4 - SIZE_E), col);
 	}
 	if (x > 1 && hig1 > 0)
 		e += x;
@@ -140,41 +175,7 @@ int set_color(t_core *main_struct, int hig, int n, int col, int wall, int hig1, 
 	return color;
 }
 
-int	num_of_col(t_core *main_struct, int wall, int i, int len)
-{
-	// printf("wall = %d\n", wall);
-	int	check;
-	int	num;
-
-	num = 0;
-	if (wall == 1 || wall == 3)
-		check = 2;
-	else
-		check = 1;
-	// printf("i = %d", i );
-	while (1)
-	{
-		if (i != 0 && ((wall == 1 || wall == 2) && (main_struct->hero->walls_2[i - 1][0] != main_struct->hero->walls_2[i][0]
-				|| main_struct->hero->walls_2[i - 1][check] % POW > main_struct->hero->walls_2[i][check] % POW)))
-			break ;
-		else if (i != 0 && ((wall == 3 || wall == 4) && (main_struct->hero->walls_2[i - 1][0] != main_struct->hero->walls_2[i][0]
-				|| main_struct->hero->walls_2[i - 1][check] % POW < main_struct->hero->walls_2[i][check] % POW)))
-			break ;
-		if (wall == 9)
-			break;
-		i ++;
-		num ++;
-		if (i >= len)
-		{
-			num = -num;
-			break ;
-		}
-	}
-	// printf("nu = %d %d\n", i, num);
-	return (num);
-}
-
-void	put_one_filar(t_core *main_struct, int i, int hig, int *col, int x, int *init, int len, int *finit)
+void	put_one_filar(t_core *main_struct, int i, int hig, int *col, int *x, int *init, int len, int *finit)
 {
 	int check;
 	int	j = -1;
@@ -228,12 +229,17 @@ void	put_one_filar(t_core *main_struct, int i, int hig, int *col, int x, int *in
 	// set_color(main_struct, -1, 0, 0);
 	if (hig1 < 0 && *finit == 0)
 	{
+		printf("obl = %d\n", ft_abs(ft_abs(hig1) / POW * 4 - SIZE_E));
+		printf("%d\n", *x);
 		if (wall == 1 || wall == 2)
-			x = main_struct->hero->walls_2[i][check] % POW;
+			*x = main_struct->hero->walls_2[i][check] % POW;
 		else
-			x = POW - main_struct->hero->walls_2[i][check] % POW;
-		x = SIZE_N * x / POW;
+			*x = POW - main_struct->hero->walls_2[i][check] % POW;
+		printf("%d %d\nPOW = %d\n", main_struct->hero->walls_2[i][2], main_struct->hero->walls_2[i][2], POW);
+		printf("x = %d\n", *x);
+		*x = SIZE_N * (*x) / POW;
 		(*finit) ++;
+		printf("x = %d\n-----", *x);
 	}
 
 	j = tmpe;
@@ -244,7 +250,7 @@ void	put_one_filar(t_core *main_struct, int i, int hig, int *col, int x, int *in
 		while (++ i < 1 + tmp)
 		{
 			if (*init == 0 || hig1 < 0)
-				my_mlx_pixel_put(main_struct, i, j, set_color(main_struct, real_hig, n, *col, wall, hig1, x));
+				my_mlx_pixel_put(main_struct, i, j, set_color(main_struct, real_hig, n, *col, wall, hig1, *x));
 			else
 				my_mlx_pixel_put(main_struct, i, j, set_color(main_struct, real_hig, n, *col, wall, hig1, 1));
 			n ++;
@@ -287,7 +293,7 @@ void	put_filars(t_core *main_struct, int *lista, int len)
 	x = SIZE_N * x / POW;
 	while (++i < len)
 	{
-		put_one_filar(main_struct, main_struct->wid, lista[i], &col, x, &init, len, &finit);
+		put_one_filar(main_struct, main_struct->wid, lista[i], &col, &x, &init, len, &finit);
 		col ++;
 	}
 	mlx_put_image_to_window(main_struct->con, main_struct->win,
