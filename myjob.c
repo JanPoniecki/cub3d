@@ -229,17 +229,17 @@ void	put_one_filar(t_core *main_struct, int i, int hig, int *col, int *x, int *i
 	// set_color(main_struct, -1, 0, 0);
 	if (hig1 < 0 && *finit == 0)
 	{
-		printf("obl = %d\n", ft_abs(ft_abs(hig1) / POW * 4 - SIZE_E));
-		printf("%d\n", *x);
+		// printf("obl = %d\n", ft_abs(ft_abs(hig1) / POW * 4 - SIZE_E));
+		// printf("%d\n", *x);
 		if (wall == 1 || wall == 2)
 			*x = main_struct->hero->walls_2[i][check] % POW;
 		else
 			*x = POW - main_struct->hero->walls_2[i][check] % POW;
-		printf("%d %d\nPOW = %d\n", main_struct->hero->walls_2[i][2], main_struct->hero->walls_2[i][2], POW);
-		printf("x = %d\n", *x);
+		// printf("%d %d\nPOW = %d\n", main_struct->hero->walls_2[i][2], main_struct->hero->walls_2[i][2], POW);
+		// printf("x = %d\n", *x);
 		*x = SIZE_N * (*x) / POW;
 		(*finit) ++;
-		printf("x = %d\n-----", *x);
+		// printf("x = %d\n-----", *x);
 	}
 
 	j = tmpe;
