@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 14:20:04 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:01:12 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,22 @@ typedef struct s_core
 	t_te	tex;
 }			t_core;
 
-typedef struct s_ft
+typedef struct s_text
 {
-	int		m1;
-	int		m2;
-	int		height;
 	int		i;
-	float	step;
-	int		steps;
-}			t_ft;
+	int		col;
+	int		init;
+	int		finit;
+	int		x;
+	int		wall;
+	int		check;
+	int		len;
+	int		j;
+	int		hig1;
+	int		x1;
+	int		hig;
+	int		wid;
+}			t_tex;
 
 void	find_start(t_hero *hero);
 double	cosine(int angle);
