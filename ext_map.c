@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ext_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:55:11 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/24 22:09:03 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/07/30 10:00:29 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	len_of_file(char *file)
-{
-	int		fd;
-	int		i;
-	char	*buf;
-
-	i = 0;
-	fd = open(file, O_RDONLY);
-	if (!fd)
-		return (-1);
-	while (1)
-	{
-		buf = get_next_line(fd);
-		if (!buf)
-			break ;
-		free(buf);
-		i ++;
-	}
-	close(fd);
-	return (i);
-}
 
 void	ext_line(t_hero *hero, int i, char *map_buf, int len)
 {
@@ -74,30 +52,16 @@ void	ext_col(t_hero *hero, int *i, int len)
 	}
 }
 
-void	change_the_map(t_hero *hero, int i, int j)
+void	change_the_map(t_hero *hero, int i, int j, int len_f)
 {
-	int	len_f;
-
-	len_f = list_len(hero->map);
-	while (hero->map[i])
+	while (hero->map[++ i])
 	{
-		j = 0;
-		while (hero->map[i][j])
+		j = -1;
+		while (hero->map[i][++ j])
 		{
 			if (hero->map[i][j] == '1')
 			{
-				if (((i - 1 >= 0 && ft_strlen(hero->map[i]) > j + 1 && ft_strlen(hero->map[i - 1]) > j)
-					&& ((hero->map[i - 1][j]  == '0' && hero->map[i][j + 1] == '0'
-					|| (hero->map[i - 1][j + 1]  == '0' && hero->map[i - 1][j] != '0' && hero->map[i][j + 1] != '0'))))
-					|| ((list_len(hero->map) > i + 1 && ft_strlen(hero->map[i + 1]) > j && ft_strlen(hero->map[i]) > j + 1)
-					&& ((hero->map[i + 1][j]  == '0' && hero->map[i][j + 1] == '0')
-					|| (hero->map[i + 1][j + 1]  == '0' && hero->map[i][j + 1] != '0' && hero->map[i + 1][j] != '0')))
-					|| ((list_len(hero->map) > i + 1 && j - 1 > 0 && ft_strlen(hero->map[i + 1]) > j)
-					&& ((hero->map[i + 1][j]  == '0' && hero->map[i][j - 1] == '0')
-					|| (hero->map[i + 1][j - 1]  == '0' && hero->map[i][j - 1] != '0' && hero->map[i + 1][j] != '0')))
-					|| ((j - 1 >= 0 && i - 1 >= 0 && ft_strlen(hero->map[i - 1]) > j)
-					&& ((hero->map[i - 1][j]  == '0' && hero->map[i][j - 1] == '0')
-					|| (hero->map[i - 1][j - 1]  == '0' && hero->map[i - 1][j] != '0' && hero->map[i][j - 1] != '0'))))
+				if (check_conditions(hero->map, i, j))
 					hero->map[i][j] = '9';
 				else if (j > 0 && (hero->map[i][j - 1] == '0'
 					|| hero->map[i][j - 1] == 'S'))
@@ -106,13 +70,12 @@ void	change_the_map(t_hero *hero, int i, int j)
 					&& (hero->map[i][j + 1] == '0'
 					|| hero->map[i][j + 1] == 'S'))
 					hero->map[i][j] = '4';
-				else if (i - 1 > 0 && ft_strlen(hero->map[i - 1]) > j && (hero->map[i - 1][j] == '0'
+				else if (i - 1 > 0 && ft_strlen(hero->map[i - 1]) > j
+					&& (hero->map[i - 1][j] == '0'
 					|| hero->map[i - 1][j] == 'S'))
 					hero->map[i][j] = '3';
 			}
-			j ++;
 		}
-		i ++;
 	}
 }
 
@@ -134,7 +97,6 @@ char	check_the_corner(t_hero *hero, int i, int j)
 	else
 		return ('9');
 }
-
 
 void	find_inner_corners(t_hero *hero, int i, int j)
 {
@@ -176,70 +138,6 @@ void	ext_map(t_hero *hero)
 		map_buf = get_next_line(fd);
 	}
 	close(fd);
-	change_the_map(hero, 0, 0);
-	// find_inner_corners(hero, 0, 0);
+	change_the_map(hero, -1, -1, list_len(hero->map));
+	find_inner_corners(hero, 0, 0);
 }
-
-// glowna funkcja to ext_map
-// potrzebuje ona tylko t_hero
-// zaalokuje pamiec dla mapy oraz
-// zmieni jej liczby na poprawne
-// int	main(void)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	t_hero hero;
-// 	ext_map(&hero);
-// 	i = 0;
-// 	while (hero.map[i])
-// 	{
-// 		printf("%s\n", hero.map[i]);
-// 		free(hero.map[i ++]);
-// 	}
-// 	free(hero.map);
-// }
-
-
-// void	change_the_map(t_hero *hero, int i, int j)
-// {
-// 	int	len_f;
-
-// 	len_f = list_len(hero->map);
-// 	while (hero->map[i])
-// 	{
-// 		j = 0;
-// 		while (hero->map[i][j])
-// 		{
-// 			if (hero->map[i][j] == '1')
-// 			{
-// 				if (((i - 1 >= 0 && ft_strlen(hero->map[i]) > j + 1 && ft_strlen(hero->map[i - 1]) > j)
-// 					&& ((hero->map[i - 1][j]  == '0' && hero->map[i][j + 1] == '0'
-// 					|| (hero->map[i - 1][j + 1]  == '0' && hero->map[i - 1][j] != '0' && hero->map[i][j + 1] != '0'))))
-// 					|| ((list_len(hero->map) > i + 1 && ft_strlen(hero->map[i + 1]) > j && ft_strlen(hero->map[i]) > j + 1)
-// 					&& ((hero->map[i + 1][j]  == '0' && hero->map[i][j + 1] == '0')
-// 					|| (hero->map[i + 1][j + 1]  == '0' && hero->map[i][j + 1] != '0' && hero->map[i + 1][j] != '0')))
-// 					|| ((list_len(hero->map) > i + 1 && j - 1 > 0 && ft_strlen(hero->map[i + 1]) > j)
-// 					&& ((hero->map[i + 1][j]  == '0' && hero->map[i][j - 1] == '0')
-// 					|| (hero->map[i + 1][j - 1]  == '0' && hero->map[i][j - 1] != '0' && hero->map[i + 1][j] != '0')))
-// 					|| ((j - 1 >= 0 && i - 1 >= 0 && ft_strlen(hero->map[i - 1]) > j)
-// 					&& ((hero->map[i - 1][j]  == '0' && hero->map[i][j - 1] == '0')
-// 					|| (hero->map[i - 1][j - 1]  == '0' && hero->map[i - 1][j] != '0' && hero->map[i][j - 1] != '0'))))
-// 					hero->map[i][j] = '9';
-// 				else if (j > 0 && (hero->map[i][j - 1] == '0'
-// 					|| hero->map[i][j - 1] == 'S'))
-// 					hero->map[i][j] = '2';
-// 				else if (ft_strlen(hero->map[i]) < j + 1 && hero->map[i][j + 1] != '\0'
-// 					&& (hero->map[i][j + 1] == '0'
-// 					|| hero->map[i][j + 1] == 'S'))
-// 					hero->map[i][j] = '4';
-// 				else if (i - 1 > 0 && ft_strlen(hero->map[i - 1]) > j
-// 					&& (hero->map[i - 1][j] == '0'
-// 					|| hero->map[i - 1][j] == 'S'))
-// 					hero->map[i][j] = '3';
-// 			}
-// 			j ++;
-// 		}
-// 		i ++;
-// 	}
-// }

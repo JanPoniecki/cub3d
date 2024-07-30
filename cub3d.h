@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/29 12:54:11 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:43:30 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@
 # include "mylibft/mylibft.h"
 # include <errno.h>
 
-# define HEIGHT 1080
-# define WIDTH 1980
-# define V_RANGE 49
-# define FILAR_SIZE 20
-# define FILWI 20
-# define DIVIDER 20000
+# define HEIGHT 700
+# define WIDTH 800
+# define V_RANGE 40
+# define FILAR_SIZE 10
+# define FILWI 10
+# define DIVIDER 10000
 # define PILLOW 5
 # define MAPF "test_map.cub"
 # define M_FILE "out"
 # define POW 30
 
-# define SIZE_N 64
-# define SIZE_E 64
-# define SIZE_S 64
-# define SIZE_W 64
+# define SIZE_N 256
+# define SIZE_E 256
+# define SIZE_S 256
+# define SIZE_W 256
 
 typedef struct s_textures
 {
@@ -156,6 +156,7 @@ void	expand_the_texture(t_core *main_str, int **texture);
 void	reduce_the_texture(t_core *main_str, int **texture);
 void	free_list_int(int **lista, int size);
 void	delete_n(t_hero *hero, int i, int j, int sum);
-int	interpolation(int height, int txt_height, int point);
-
+int		interpolation(int height, int txt_height, int point);
+int		check_conditions(char **map, int i, int j);
+int		len_of_file(char *file);
 #endif
