@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:42:47 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/30 09:59:42 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/30 13:35:17 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	find_start(t_hero *hero)
 				hero->map[crd[0]][crd[1]] = '0';
 				return ;
 			}
-			crd[1] ++;
+			crd[1]++;
 		}
 		crd[1] = 0;
-		crd[0] ++;
+		crd[0]++;
 	}
 }
 
@@ -69,4 +69,31 @@ int	len_of_file(char *file)
 	}
 	close(fd);
 	return (i);
+}
+
+long	my_strtol(char *str)
+{
+	long	result;
+	int		shift;
+	int		digit;
+	char	c;
+
+	result = 0;
+	shift = 0;
+	if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X'))
+		str += 2;
+	while (*str)
+	{
+		c = *str++;
+		if (c >= '0' && c <= '9')
+			digit = c - '0';
+		else if (c >= 'a' && c <= 'f')
+			digit = c - 'a' + 10;
+		else if (c >= 'A' && c <= 'F')
+			digit = c - 'A' + 10;
+		else
+			break ;
+		result = result * 16 + digit;
+	}
+	return (result);
 }

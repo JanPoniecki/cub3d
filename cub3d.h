@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 11:43:30 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/30 13:37:37 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ typedef struct s_ft
 	int		steps;
 }			t_ft;
 
-
 void	find_start(t_hero *hero);
 double	cosine(int angle);
 void	calc_axis(t_hero *hero, char type);
@@ -150,7 +149,8 @@ void	checker(t_hero *hero, t_map *map);
 void	read_map(t_hero *hero, t_map *map);
 void	my_mlx_pixel_put(t_core *data, int x, int y, int color);
 char	*dec_to_hex_helper(unsigned int n);
-int		write_texture(t_core *main_str, char *relative_path, int img_width, int **buffer);
+int		write_texture(t_core *main_str, \
+	char *relative_path, int img_width, int **buffer);
 int		write_textures(t_core *main_str);
 void	expand_the_texture(t_core *main_str, int **texture);
 void	reduce_the_texture(t_core *main_str, int **texture);
@@ -159,4 +159,6 @@ void	delete_n(t_hero *hero, int i, int j, int sum);
 int		interpolation(int height, int txt_height, int point);
 int		check_conditions(char **map, int i, int j);
 int		len_of_file(char *file);
+long	my_strtol(char *str);
+
 #endif

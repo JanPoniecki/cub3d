@@ -1,32 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   myjob.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/30 13:32:16 by bkotwica          #+#    #+#             */
+/*   Updated: 2024/07/30 13:52:01 by bkotwica         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	put_filars(t_core *main_struct, int *lista, int len);
 void	display_the_win(t_core *main_struct);
-
-long	my_strtol(char *str)
-{
-	long	result = 0;
-	int		shift = 0;
-	int		digit;
-	char	c;
-
-	if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X'))
-		str += 2;
-	while (*str)
-	{
-		c = *str++;
-		if (c >= '0' && c <= '9')
-			digit = c - '0';
-		else if (c >= 'a' && c <= 'f')
-			digit = c - 'a' + 10;
-		else if (c >= 'A' && c <= 'F')
-			digit = c - 'A' + 10;
-		else
-			break;
-		result = result * 16 + digit;
-	}
-	return result;
-}
 
 void	close_window(t_core *mlx)
 {
@@ -138,6 +125,7 @@ int	my_key_hook(int keycode, t_core *mlx)
 	for_arrows(keycode, mlx);
 	return (0);
 }
+
 int set_color(t_core *main_struct, int hig, int n, int col, int wall, int hig1, int x)
 {
 	int c, e, darkener, color;
@@ -192,7 +180,7 @@ void	put_one_filar(t_core *main_struct, int i, int hig, int *col, int *x, int *i
 	if (i == 0)
 	{
 		hig1 = num_of_col(main_struct, wall, 0, len, &x1);
-		printf("hig1 = %d\n", hig1);
+		// printf("hig1 = %d\n", hig1);
 	}
 	if (i != 0 && ((wall == 1 || wall == 2) && (main_struct->hero->walls_2[i - 1][0] != main_struct->hero->walls_2[i][0]
 			|| main_struct->hero->walls_2[i - 1][check] % POW > main_struct->hero->walls_2[i][check] % POW)))
@@ -200,7 +188,7 @@ void	put_one_filar(t_core *main_struct, int i, int hig, int *col, int *x, int *i
 		*col = 0;
 		hig1 = num_of_col(main_struct, wall, i + 1, len, &x1);
 		(*init) ++;
-		printf("%d\n", hig1);
+		// printf("%d\n", hig1);
 
 	}
 	else if (i != 0 && ((wall == 3 || wall == 4) && (main_struct->hero->walls_2[i - 1][0] != main_struct->hero->walls_2[i][0]
@@ -209,7 +197,7 @@ void	put_one_filar(t_core *main_struct, int i, int hig, int *col, int *x, int *i
 		*col = 0;
 		hig1 = num_of_col(main_struct, wall, i + 1, len, &x1);
 		(*init) ++;
-		printf("%d\n", hig1);
+		// printf("%d\n", hig1);
 	}
 	int	tmp = i;
 	int	real_hig = hig;
@@ -232,18 +220,18 @@ void	put_one_filar(t_core *main_struct, int i, int hig, int *col, int *x, int *i
 	// set_color(main_struct, -1, 0, 0);
 	if (hig1 < 0 && *finit == 0)
 	{
-		printf("obl = %d, POW = %d\n", ft_abs(x1 - main_struct->hero->walls_2[i][check]), POW);
+		// printf("obl = %d, POW = %d\n", ft_abs(x1 - main_struct->hero->walls_2[i][check]), POW);
 		// printf("%d\n", *x);
 		if (wall == 1 || wall == 2)
 			*x = main_struct->hero->walls_2[i][check] % POW;
 		else
 			*x = POW - main_struct->hero->walls_2[i][check] % POW;
-		printf("x = %d, x1 = %d\n", main_struct->hero->walls_2[i][check], x1);
+		// printf("x = %d, x1 = %d\n", main_struct->hero->walls_2[i][check], x1);
 		// printf("x = %d\n", *x);
 		*x = SIZE_N * (*x) / POW;
 		(*finit) ++;
 		*x = ft_abs(x1 - main_struct->hero->walls_2[i][check]) * SIZE_N / POW;
-		printf("x = %d\n-----", *x);
+		// printf("x = %d\n-----", *x);
 	}
 
 	j = tmpe;
