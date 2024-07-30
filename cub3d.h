@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 13:37:37 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:20:04 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,5 +160,12 @@ int		interpolation(int height, int txt_height, int point);
 int		check_conditions(char **map, int i, int j);
 int		len_of_file(char *file);
 long	my_strtol(char *str);
+void	free_list(char **lista);
+void	free_list_int(int **lista, int size);
+int		list_len(char **lista);
+void	initilize_map(t_map *map);
+void	free_map(t_map *map);
+void	write_to_file(int i, char *line, int fd_out, t_map *map);
+void	write_to_ma(char **var, int i, char **s_line, char ***vars);
 
 #endif

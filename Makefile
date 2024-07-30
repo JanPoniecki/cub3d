@@ -6,7 +6,8 @@ OBJDIR = Obj/
 MLX = mlxlibX/libmlx_Linux.a
 SRC = main.c myjob.c start_utils.c calc.c debug.c ext_map.c moves.c\
 	fine_tune.c read_map.c check_map.c main.c dec_to_hex.c \
-	write_textures.c delete_n.c interpolation.c ext_map_case.c
+	write_textures.c delete_n.c interpolation.c ext_map_case.c \
+	utils2.c write_to_ma.c
 
 OBJ := $(SRC:%.c=$(OBJDIR)%.o)
 

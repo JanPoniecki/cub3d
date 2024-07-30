@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:42:47 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/30 13:35:17 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:18:38 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,17 @@ long	my_strtol(char *str)
 		result = result * 16 + digit;
 	}
 	return (result);
+}
+
+void	write_to_file(int i, char *line, int fd_out, t_map *map)
+{
+	if (line[0] == '\n')
+		map->flag = 1;
+	while (line[++ i])
+	{
+		if (line[i] == ' ')
+			write(fd_out, "1", 1);
+		else
+			write(fd_out, &line[i], 1);
+	}
 }

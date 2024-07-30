@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:29:44 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 09:33:30 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:06:59 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 // that is only checking if there is only
 // valid characters
-int	check_for_wrong(void)
+int	check_for_wrong(int fd)
 {
-	int		fd;
 	char	*line;
 	int		count;
 	int		i;
 
 	count = 0;
-	fd = open(M_FILE, O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -45,7 +43,7 @@ int	check_for_wrong(void)
 	return (0);
 }
 
-int	check_the_valid(t_hero *hero, int i, int j)
+int	check_the_valid(t_hero *hero, int i, int j, int tm)
 {
 	int		len_f;
 
@@ -57,31 +55,16 @@ int	check_the_valid(t_hero *hero, int i, int j)
 		{
 			if (hero->map[i][j] == '0')
 			{
-				if (i > 0 && i  + 1 < len_f && (ft_strlen(hero->map[i - 1]) < j
-					|| ft_strlen(hero->map[i + 1]) < j))
-						return (1);
+				if (i > 0 && i + 1 < len_f && (ft_strlen(hero->map[i - 1]) < j
+						|| ft_strlen(hero->map[i + 1]) < j))
+					return (1);
 			}
 		}
 	}
-	return (0);
-}
-
-int	check_color(t_hero *hero)
-{
-	int	i;
-	int	tm;
-
 	i = 0;
 	while (hero->ma->f[i])
 	{
 		tm = ft_atoi(hero->ma->f[i ++]);
-		if (tm < 0 || tm > 255)
-			return (1);
-	}
-	i = 0;
-	while (hero->ma->c[i])
-	{
-		tm = ft_atoi(hero->ma->c[i ++]);
 		if (tm < 0 || tm > 255)
 			return (1);
 	}
@@ -115,7 +98,7 @@ int	existence_fi(t_hero *hero)
 	return (0);
 }
 
-int	check_the_ext(t_hero *hero)
+int	check_the_ext(t_hero *hero, int i, int j)
 {
 	int	len;
 	int	len1;
@@ -133,33 +116,33 @@ int	check_the_ext(t_hero *hero)
 		|| ft_strnstr(hero->ma->we + len2 - 4, ".xpm", 4) == NULL
 		|| ft_strnstr(hero->ma->ea + len1 - 4, ".xpm", 4) == NULL)
 		return (1);
-	return (0);
-}
-
-int	check_outside_walls(t_hero *hero)
-{
-	int	i;
-	int	j;
-
-	i = -1;
 	while (hero->map[++ i])
 	{
 		j = ft_strlen(hero->map[i]);
 		if (hero->map[i][j - 1] != '1'
 			|| hero->map[i][0] != '1')
-		return (1);
+			return (1);
 	}
 	return (0);
 }
 
 void	checker(t_hero *hero, t_map *map)
 {
-	if (check_the_valid(hero, -1, -1)
-		|| check_for_wrong()
-		|| check_color(hero)
+	int	i;
+	int	tm;
+
+	i = 0;
+	while (hero->ma->c[i])
+	{
+		tm = ft_atoi(hero->ma->c[i ++]);
+		if (tm < 0 || tm > 255)
+			break ;
+	}
+	if (check_the_valid(hero, -1, -1, 0)
+		|| check_for_wrong(open(M_FILE, O_RDONLY))
 		|| existence_fi(hero)
-		|| check_the_ext(hero)
-		|| check_outside_walls(hero))
+		|| check_the_ext(hero, -1, -1)
+		|| i != 3)
 	{
 		free_map(map);
 		free_list(hero->map);
@@ -169,23 +152,3 @@ void	checker(t_hero *hero, t_map *map)
 		exit (1);
 	}
 }
-
-// int	main(void)
-// {
-// 	t_hero	hero;
-// 	int		i;
-
-// 	ext_map(&hero);
-// 	check_for_wrong();
-// 	if (check_the_valid(&hero, -1, -1))
-// 	{
-// 		i = 0;
-// 		while (hero.map[i])
-// 			free(hero.map[i ++]);
-// 		free(hero.map);
-// 	}
-// 	i = 0;
-// 	while (hero.map[i])
-// 		free(hero.map[i ++]);
-// 	free(hero.map);
-// }
