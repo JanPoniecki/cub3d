@@ -152,7 +152,7 @@ int set_color(t_core *main_struct, int hig, int n, int col, int wall, int hig1, 
 	else
 	{
 		// printf("x = %d\n", x);
-		e = interpolation(ft_abs(hig1), SIZE_N - x, col);
+		e = interpolation(ft_abs(hig1), x, col);
 	}
 	if (x > 1 && hig1 > 0)
 		e += x;
@@ -242,8 +242,8 @@ void	put_one_filar(t_core *main_struct, int i, int hig, int *col, int *x, int *i
 		// printf("x = %d\n", *x);
 		*x = SIZE_N * (*x) / POW;
 		(*finit) ++;
-		*x = ft_abs(x1 - main_struct->hero->walls_2[i][check]);
-		// printf("x = %d\n-----", *x);
+		*x = ft_abs(x1 - main_struct->hero->walls_2[i][check]) * SIZE_N / POW;
+		printf("x = %d\n-----", *x);
 	}
 
 	j = tmpe;
