@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:09:56 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 14:09:56 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:19:16 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	delete_n(t_hero *hero, int i, int j, int sum)
 		}
 	}
 	tmp = poww(sum) / 2;
-	if (tmp + i_start < i && ft_strlen(hero->map[i_start]) > tmp + j_start)
+	if (tmp + i_start < i && (int)ft_strlen(hero->map[i_start])
+		> tmp + j_start)
 		hero->map[tmp + i_start][tmp + j_start] = c;
 }

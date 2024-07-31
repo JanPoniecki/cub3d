@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:17:33 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/31 10:40:44 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:13:57 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	get_collision(t_hero *hero, int angle, int i)
 
 void	check_neighbour_1(t_hero *hero, int i, int w, int h)
 {
+	h = 0;
 	if (i > 0)
 	{
 		if (hero->walls[i - 1] / 10000 == 1 || hero->walls[i - 1] / 10000 == 3)

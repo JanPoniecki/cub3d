@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:55:11 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 14:10:58 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:14:52 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ext_col(t_hero *hero, int *i, int len)
 
 void	change_the_map(t_hero *hero, int i, int j, int len_f)
 {
+	len_f = 0;
 	while (hero->map[++ i])
 	{
 		j = -1;
@@ -70,7 +71,7 @@ void	change_the_map(t_hero *hero, int i, int j, int len_f)
 					&& (hero->map[i][j + 1] == '0'
 					|| hero->map[i][j + 1] == 'S'))
 					hero->map[i][j] = '4';
-				else if (i - 1 > 0 && ft_strlen(hero->map[i - 1]) > j
+				else if (i - 1 > 0 && (int)ft_strlen(hero->map[i - 1]) > j
 					&& (hero->map[i - 1][j] == '0'
 					|| hero->map[i - 1][j] == 'S'))
 					hero->map[i][j] = '3';

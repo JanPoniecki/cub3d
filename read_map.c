@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 08:46:31 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 14:19:40 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:15:31 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	colors(char **s_line, t_map *map)
 	return (0);
 }
 
-int	check_line(char **s_line, char *line, int fd, t_map *map)
+int	check_line(char **s_line, t_map *map)
 {
 	if (s_line[0][0] == 'N' && s_line[0][1] == 'O' && s_line[0][2] == '\0')
 	{
@@ -75,7 +75,7 @@ void	while_loop(int fd, int fd_out, char **s_line, t_map *map)
 		{
 			line[ft_strlen(line) - 1] = '\0';
 			s_line = ft_split(line, ' ');
-			if (check_line(s_line, line, fd, map) || colors(s_line, map))
+			if (check_line(s_line, map) || colors(s_line, map))
 				map->flag = 1;
 			free_list(s_line);
 		}
@@ -121,6 +121,7 @@ void	read_map(t_hero *hero, t_map *map)
 	fd_out = open(M_FILE, O_WRONLY | O_CREAT, 0644);
 	map->flag = 0;
 	fd = open(MAPF, O_RDONLY);
+	s_line = NULL;
 	while_loop(fd, fd_out, s_line, map);
 	close(fd);
 	close(fd_out);

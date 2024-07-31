@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:29:44 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 14:06:59 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:18:37 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ int	check_the_valid(t_hero *hero, int i, int j, int tm)
 		{
 			if (hero->map[i][j] == '0')
 			{
-				if (i > 0 && i + 1 < len_f && (ft_strlen(hero->map[i - 1]) < j
-						|| ft_strlen(hero->map[i + 1]) < j))
+				if (i > 0 && i + 1 < len_f
+					&& (ft_strlen(hero->map[i - 1]) < (size_t)j
+						|| ft_strlen(hero->map[i + 1]) < (size_t)j))
 					return (1);
 			}
 		}
