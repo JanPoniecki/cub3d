@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 09:54:37 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 10:40:49 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:37:03 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	close_window(t_core *mlx)
 	free_map(mlx->hero->ma);
 	free(mlx->hero);
 	free_list_int(mlx->tex.n, SIZE_N);
-	free_list_int(mlx->tex.e, SIZE_E);
-	free_list_int(mlx->tex.s, SIZE_S);
-	free_list_int(mlx->tex.w, SIZE_W);
+	free_list_int(mlx->tex.e, SIZE_N);
+	free_list_int(mlx->tex.s, SIZE_N);
+	free_list_int(mlx->tex.w, SIZE_N);
 	exit (0);
 }
 

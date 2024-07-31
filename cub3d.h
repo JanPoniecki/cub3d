@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 10:41:19 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:39:19 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,27 @@
 # include "mylibft/mylibft.h"
 # include <errno.h>
 
+// the window size
+// if you change the win size
+// youd should also change the
+// v_range filar_size, filwi, divider
 # define HEIGHT 700
 # define WIDTH 800
+
 # define V_RANGE 40
 # define FILAR_SIZE 10
 # define FILWI 10
 # define DIVIDER 10000
+
 # define PILLOW 5
-# define MAPF "test_map.cub"
+# define MAPF "map.cub"
 # define M_FILE "out"
 # define POW 30
 
+// this is the size of the texture
+// the texture must be a square
+// this number is size of one side
 # define SIZE_N 256
-# define SIZE_E 256
-# define SIZE_S 256
-# define SIZE_W 256
 
 typedef struct s_textures
 {

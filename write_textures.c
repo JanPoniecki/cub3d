@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:38:40 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 13:48:14 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:36:53 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ int	write_texture(t_core *main_str, char *relative_path,
 int	write_textures(t_core *main_str)
 {
 	main_str->tex.n = malloc(sizeof(int *) * SIZE_N);
-	main_str->tex.s = malloc(sizeof(int *) * SIZE_S);
-	main_str->tex.e = malloc(sizeof(int *) * SIZE_E);
-	main_str->tex.w = malloc(sizeof(int *) * SIZE_W);
+	main_str->tex.s = malloc(sizeof(int *) * SIZE_N);
+	main_str->tex.e = malloc(sizeof(int *) * SIZE_N);
+	main_str->tex.w = malloc(sizeof(int *) * SIZE_N);
 	if (write_texture(main_str, main_str->hero->ma->no,
 			SIZE_N, main_str->tex.n)
 		|| write_texture(main_str, main_str->hero->ma->so,
-			SIZE_S, main_str->tex.s)
+			SIZE_N, main_str->tex.s)
 		|| write_texture(main_str, main_str->hero->ma->ea,
-			SIZE_E, main_str->tex.e)
+			SIZE_N, main_str->tex.e)
 		|| write_texture(main_str, main_str->hero->ma->we,
-			SIZE_W, main_str->tex.w))
+			SIZE_N, main_str->tex.w))
 		return (1);
 	return (0);
 }
