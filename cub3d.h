@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 16:01:12 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 09:58:41 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,5 +181,17 @@ void	initilize_map(t_map *map);
 void	free_map(t_map *map);
 void	write_to_file(int i, char *line, int fd_out, t_map *map);
 void	write_to_ma(char **var, int i, char **s_line, char ***vars);
+int		ass_check(int wall);
+int		my_key_hook(int keycode, t_core *mlx);
+void	calc_for_hig1(t_tex *tex, t_core *main_struct);
+void	draw_ceiling(t_core *main_struct, t_tex *tex);
+void	draw_walls(t_tex *tex, t_core *main_struct);
+void	draw_floor(t_core *main_struct, t_tex *tex);
+void	close_window(t_core *mlx);
+void	display_the_win(t_core *main_struct);
+void	put_filars(t_core *main_struct, int *lista, int len);
+void	for_arrows(int keycode, t_core *mlx);
+int		set_color(t_core *main_struct, int n, int x, t_tex *tex);
+int		check_stat(t_tex *tex, t_core *main_struct, int i, int check);
 
 #endif
