@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 09:54:37 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 09:55:03 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 10:40:49 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,20 @@ int	ass_check(int wall)
 		return (2);
 	else
 		return (1);
+}
+
+void	handle_corners(t_hero *hero)
+{
+	int	i;
+
+	i = 0;
+	while (i < V_RANGE * 2)
+	{
+		if (hero->walls[i] / 10000 > 4)
+		{
+			if (i > 0)
+				check_neighbour_1(hero, i, 0, 0);
+		}
+		i ++;
+	}
 }

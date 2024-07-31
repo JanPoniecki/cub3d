@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 09:58:41 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 10:41:19 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,15 @@ typedef struct s_text
 	int		color;
 }			t_tex;
 
+typedef struct s_tm_ref
+{
+	float	step;
+	int		height;
+	int		i;
+	int		m1;
+	int		m2;
+}		t_ref;
+
 void	find_start(t_hero *hero);
 double	cosine(int angle);
 void	calc_axis(t_hero *hero, char type);
@@ -193,5 +202,17 @@ void	put_filars(t_core *main_struct, int *lista, int len);
 void	for_arrows(int keycode, t_core *mlx);
 int		set_color(t_core *main_struct, int n, int x, t_tex *tex);
 int		check_stat(t_tex *tex, t_core *main_struct, int i, int check);
+void	overwrite_corner(t_hero *hero, int i, int l, int r);
+void	fix_corners(t_hero *hero, int i);
+void	re_init_axis(t_hero *hero, int rotation);
+double	cosine(int angle);
+double	sine(int angle);
+int		ft_abs(int num);
+void	find_collision(t_hero *hero, t_axis *axis, int i);
+void	set_axis_vars_back(t_hero *hero, t_axis *axis, int rotation);
+void	init_collision_vars(t_hero *hero, t_axis *axis, int angle);
+void	set_axis_vars_forw(t_hero *hero, t_axis *axis, int rotation);
+void	handle_corners(t_hero *hero);
+void	check_neighbour_1(t_hero *hero, int i, int w, int h);
 
 #endif
