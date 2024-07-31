@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:17:54 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/31 11:42:08 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:58:46 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	darken_color(int color, int darkener)
 	red = (color >> 16) & 0xFF;
 	green = (color >> 8) & 0xFF;
 	blue = color & 0xFF;
+	if (!darkener)
+		return (((red - 10) << 16) | ((green - 10) << 8) | (blue - 10));
 	if (darkener > red)
 		red = 0;
 	else
