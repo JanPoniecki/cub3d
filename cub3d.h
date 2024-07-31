@@ -126,6 +126,13 @@ typedef struct s_text
 	int		x1;
 	int		hig;
 	int		wid;
+	int		t_w;
+	int		r_hig;
+	int		tmph;
+	int		tmpe;
+	int		c;
+	int		e;
+	int		color;
 }			t_tex;
 
 void	find_start(t_hero *hero);

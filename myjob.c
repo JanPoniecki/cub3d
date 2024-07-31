@@ -152,41 +152,41 @@ int	my_key_hook(int keycode, t_core *mlx)
 	for_arrows(keycode, mlx);
 	return (0);
 }
+// (t_core *main_struct, int hig, int n, 
+// int col, int wall, int hig1, int x, t_tex *tex)
 
-int set_color(t_core *main_struct, int hig, int n, int col, int wall, int hig1, int x)
+// 	set_color(main_struct, tex->r_hig, n, tex->col,
+// 	tex->wall, tex->hig1, tex->x));
+int set_color(t_core *main_struct, int n, int x, t_tex *tex)
 {
-	int c, e, darkener, color;
+	int darkener;
 
-	c = interpolation(hig, SIZE_N - 1, n);
-	if (hig1 > 0)
-		e = interpolation(ft_abs(hig1), SIZE_N - x, col);
+	tex->c = interpolation(tex->r_hig, SIZE_N - 1, n);
+	if (tex->hig1 > 0)
+		tex->e = interpolation(ft_abs(tex->hig1), SIZE_N - x, tex->col);
 	else
-		e = interpolation(ft_abs(hig1), x, col);
-	if (x > 1 && hig1 > 0)
-		e += x;
-	if (wall == 1)
-		color = main_struct->tex.n[c][e % SIZE_N];
-	else if (wall == 2)
-		color = main_struct->tex.e[c][e % SIZE_N];
-	else if (wall == 3)
-		color = main_struct->tex.s[c][e % SIZE_N];
-	else if (wall == 4)
-		color = main_struct->tex.w[c][e % SIZE_N];
-	darkener = hig / 5;
+		tex->e = interpolation(ft_abs(tex->hig1), x, tex->col);
+	if (x > 1 && tex->hig1 > 0)
+		tex->e += x;
+	if (tex->wall == 1)
+		tex->color = main_struct->tex.n[tex->c][tex->e % SIZE_N];
+	else if (tex->wall == 2)
+		tex->color = main_struct->tex.e[tex->c][tex->e % SIZE_N];
+	else if (tex->wall == 3)
+		tex->color = main_struct->tex.s[tex->c][tex->e % SIZE_N];
+	else if (tex->wall == 4)
+		tex->color = main_struct->tex.w[tex->c][tex->e % SIZE_N];
+	darkener = tex->r_hig / 5;
 	if (darkener > 125)
 		darkener = 125;
 	darkener = 125 - darkener;
 	if (darkener > 5)
-		color = darken_color(color, darkener);
-	return color;
+		tex->color = darken_color(tex->color, darkener);
+	return tex->color;
 }
 
-void	put_one_filar(t_core *main_struct, t_tex *tex)
+void	calc_for_hig1(t_tex *tex, t_core *main_struct)
 {
-	tex->j = -1;
-	tex->wall = main_struct->hero->walls_2[tex->wid][0] / 10000;
-	tex->x1 = 0;
-	tex->check = ass_check(tex->wall);
 	if (tex->wid == 0)
 		tex->hig1 = num_of_col(main_struct, tex->wall, 0, tex->len, &tex->x1);
 	if (tex->wid != 0 && ((tex->wall == 1 || tex->wall == 2)
@@ -211,51 +211,77 @@ void	put_one_filar(t_core *main_struct, t_tex *tex)
 				tex->len, &tex->x1);
 		tex->init ++;
 	}
-	int	tmp = tex->wid;
-	int	real_hig = tex->hig;
-	if (tex->hig > HEIGHT)
-		tex->hig = HEIGHT;
-	int	tmph = tex->hig;
-	int	tmpe = (HEIGHT - tmph) / 2;
-	tex->j = HEIGHT / 2;
-	int	a = -1;
+}
+
+void	draw_walls(t_tex *tex, t_core *main_struct)
+{
+	int	n;
+
+	n = (tex->r_hig - tex->hig) / 2;
+	tex->j = tex->tmpe;
+	while (++ tex->j < tex->tmpe + tex->tmph)
+	{
+		tex->wid = tex->t_w - 1;
+		while (++ tex->wid < 1 + tex->t_w)
+		{
+			if (tex->init == 0 || tex->hig1 < 0)
+				my_mlx_pixel_put(main_struct, tex->wid, tex->j,
+					set_color(main_struct, n, tex->x, tex));
+			else
+				my_mlx_pixel_put(main_struct, tex->wid, tex->j,
+					set_color(main_struct, n, 1, tex));
+			n ++;
+		}
+	}
+}
+
+void	draw_ceiling(t_core *main_struct, t_tex *tex)
+{
+	int	a;
+
+	a = -1;
 	while (++a < tex->j)
 	{
-		tex->wid = tmp;
-		while (tex->wid < 1 + tmp)
+		tex->wid = tex->t_w;
+		while (tex->wid < 1 + tex->t_w)
 			my_mlx_pixel_put(main_struct, tex->wid ++, a,
 				my_strtol(main_struct->hero->ma->ceiling));
 	}
+}
+
+void	draw_floor(t_core *main_struct, t_tex *tex)
+{
+	tex->j = tex->tmpe + tex->tmph;
+	while (++tex-> j < HEIGHT)
+	{
+		tex->wid = tex->t_w;
+		while (tex->wid < 1 + tex->t_w)
+			my_mlx_pixel_put(main_struct, tex->wid ++, tex->j,
+				my_strtol(main_struct->hero->ma->floor));
+	}
+}
+
+void	put_one_filar(t_core *main_struct, t_tex *tex)
+{
+	tex->j = -1;
+	tex->wall = main_struct->hero->walls_2[tex->wid][0] / 10000;
+	tex->x1 = 0;
+	tex->check = ass_check(tex->wall);
+	calc_for_hig1(tex, main_struct);
+	tex->t_w = tex->wid;
+	tex->r_hig = tex->hig;
+	if (tex->hig > HEIGHT)
+		tex->hig = HEIGHT;
+	tex->tmph = tex->hig;
+	tex->tmpe = (HEIGHT - tex->tmph) / 2;
+	tex->j = HEIGHT / 2;
+	draw_ceiling(main_struct, tex);
 	if (tex->hig1 < 0 && tex->finit++ == 0)
 		tex->x = ft_abs(tex->x1 - main_struct->hero
 				->walls_2[tex->wid][tex->check])
 			* SIZE_N / POW;
-	tex->j = tmpe;
-	int	n = (real_hig - tex->hig) / 2;
-	while (++ tex->j < tmpe + tmph)
-	{
-		tex->wid = tmp - 1;
-		while (++ tex->wid < 1 + tmp)
-		{
-			if (tex->init == 0 || tex->hig1 < 0)
-				my_mlx_pixel_put(main_struct, tex->wid, tex->j,
-					set_color(main_struct, real_hig, n, tex->col,
-						tex->wall, tex->hig1, tex->x));
-			else
-				my_mlx_pixel_put(main_struct, tex->wid, tex->j,
-					set_color(main_struct, real_hig, n, tex->col,
-						tex->wall, tex->hig1, 1));
-			n ++;
-		}
-	}
-	tex->j = tmpe + tmph;
-	while (++tex-> j < HEIGHT)
-	{
-		tex->wid = tmp;
-		while (tex->wid < 1 + tmp)
-			my_mlx_pixel_put(main_struct, tex->wid ++, tex->j,
-				my_strtol(main_struct->hero->ma->floor));
-	}
+	draw_walls(tex, main_struct);
+	draw_floor(main_struct, tex);
 	main_struct->wid += 1;
 }
 
