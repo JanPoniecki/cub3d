@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 08:46:31 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 11:32:04 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:38 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	colors(char **s_line, t_map *map)
 {

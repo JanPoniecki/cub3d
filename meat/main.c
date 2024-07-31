@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:35:41 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 13:36:12 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:25 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	main(void)
 {

@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:19:49 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 14:19:56 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:43:08 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	write_to_vars(char ***vars, int i, int j, char **buff)
 {

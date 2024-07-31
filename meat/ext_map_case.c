@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 09:50:22 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 11:20:53 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:15 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	check_top_right(char **map, int i, int j)
 {

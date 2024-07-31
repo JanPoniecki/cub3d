@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 09:48:15 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 09:48:44 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:36 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	put_one_filar(t_core *main_struct, t_tex *tex)
 {

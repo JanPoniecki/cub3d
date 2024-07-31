@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 09:56:32 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 09:57:35 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:00 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	num_of_col(t_core *main_struct, int i, t_tex *tex)
 {

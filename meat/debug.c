@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:17:54 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/30 10:04:36 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:08 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	print_map(t_hero *hero)
 {

@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:38:40 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 11:36:53 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:43:06 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	write_texture(t_core *main_str, char *relative_path,
 	int img_width, int **buffer)

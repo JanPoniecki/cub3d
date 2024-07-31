@@ -6,7 +6,7 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:35:35 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 11:39:19 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:45:55 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define DIVIDER 10000
 
 # define PILLOW 5
-# define MAPF "map.cub"
+# define MAPF "map_conf.cub"
 # define M_FILE "out"
 # define POW 30
 

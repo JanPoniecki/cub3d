@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:30:32 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/30 13:31:50 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:29 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	move_on_y(t_core *main_struct, int change)
 {

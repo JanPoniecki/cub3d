@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:25:38 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 10:27:06 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:27 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	bzero_axis(t_hero *hero, int size, char type)
 {

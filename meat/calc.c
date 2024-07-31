@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:17:33 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/31 11:13:57 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:03 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	calc_height(t_hero *hero, t_axis *axis, int i)
 {

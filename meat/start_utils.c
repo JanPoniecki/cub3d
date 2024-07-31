@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:42:47 by jponieck          #+#    #+#             */
-/*   Updated: 2024/07/30 14:18:38 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:42 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	set_angle(t_hero *hero, char s)
 {

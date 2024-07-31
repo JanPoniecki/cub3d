@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:22:48 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 10:23:16 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:52 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	find_min_max(int start, int stop, t_hero *hero)
 {

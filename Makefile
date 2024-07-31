@@ -3,12 +3,32 @@ NAME = cub3d
 LIB = ./mylibft/mylibft.a
 OBJDIR = Obj/
 MLX = mlxlibX/libmlx_Linux.a
-SRC = main.c myjob.c start_utils.c calc.c debug.c ext_map.c moves.c\
-	read_map.c check_map.c main.c dec_to_hex.c \
-	write_textures.c delete_n.c interpolation.c ext_map_case.c \
-	utils2.c write_to_ma.c put_image.c utils_3.c calc_for_text.c \
-	overwrite.c tune_view.c fix_corners.c math_calc.c set_axis.c \
-	calc_axis.c
+SRC = meat/main.c \
+	meat/myjob.c \
+	meat/start_utils.c \
+	meat/calc.c \
+	meat/debug.c \
+	meat/ext_map.c \
+	meat/moves.c \
+	meat/read_map.c \
+	meat/check_map.c \
+	meat/main.c \
+	meat/dec_to_hex.c \
+	meat/write_textures.c \
+	meat/delete_n.c \
+	meat/interpolation.c \
+	meat/ext_map_case.c \
+	meat/utils2.c \
+	meat/write_to_ma.c \
+	meat/put_image.c \
+	meat/utils_3.c \
+	meat/calc_for_text.c \
+	meat/overwrite.c \
+	meat/tune_view.c \
+	meat/fix_corners.c \
+	meat/math_calc.c \
+	meat/set_axis.c \
+	meat/calc_axis.c
 
 OBJ := $(SRC:%.c=$(OBJDIR)%.o)
 

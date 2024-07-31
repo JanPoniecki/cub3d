@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:55:11 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 11:14:52 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:18 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	ext_line(t_hero *hero, int i, char *map_buf, int len)
 {

@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:29:44 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 11:18:37 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:06 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 // that is only checking if there is only
 // valid characters

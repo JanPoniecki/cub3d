@@ -6,11 +6,11 @@
 /*   By: bkotwica <bkotwica@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:20:32 by bkotwica          #+#    #+#             */
-/*   Updated: 2024/07/31 10:20:55 by bkotwica         ###   ########.fr       */
+/*   Updated: 2024/07/31 11:42:33 by bkotwica         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	overwrite_left(t_hero *hero, int i, int n)
 {
